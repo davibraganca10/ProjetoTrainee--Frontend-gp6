@@ -1,0 +1,1 @@
+# ProjetoTrainee--Frontend-gp6
