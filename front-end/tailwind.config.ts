@@ -13,7 +13,8 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         verde_unb: '#A4FED3',
-        corBotaoLogin: '#00ABED'
+        corBotaoLogin: '#00ABED',
+        corFundo: '#EDEDED',
       },
       fontFamily: {
         fontAll: ['Questrial', 'sans-serif'],   //pode ser usada em varias partes do codigo.

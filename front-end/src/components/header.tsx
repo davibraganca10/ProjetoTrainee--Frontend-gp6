@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header className="bg-verde_unb h-20 flex items-center justify-between px-4">
       <Link href="/feed" className="ml-3">
-        <Image src="/unb_logo.png" alt="logo unb" width={92} height={46} />
+        <Image src="/unb_logo.png" alt="logo unb" width={100} height={50} layout="responsive"/>
       </Link>
       <Link
         href="/login"
