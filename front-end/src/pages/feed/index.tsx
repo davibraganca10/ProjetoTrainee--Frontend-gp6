@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const FeedDeslogado = () => {
   return (
-    <body>
+    <main>
       <header className='bg-verde_unb h-20 flex items-center justify-between px-4'>
         <Link href="/feed" className='ml-3'> 
           <Image src="/unb_logo.png" alt='logo unb' width={92} height={46} layout="responsive" /> 
@@ -15,16 +15,12 @@ const FeedDeslogado = () => {
           Login
         </Link>
       </header>
-      <main>
+      
 
-        <h1 className=''>Nossos Professores</h1>
-        <input type="text" />
       
         
-
-      </main>
-
-    </body>
+    </main>
+      
   )
 }
 
