@@ -3,6 +3,7 @@
 # foto da logo da unb na pasta public --> bom guardar as fotos usadas lá.
 
 # ainda tenho que confirmar com algum monitor se a criacao do folder feed ta no lugar certo. pedir dicas.
+# depois de criar a pagina de login, tenho que botar no href no botao de login na pagina de feed deslogado.
 
 
 ----------------------------------------------------------------
