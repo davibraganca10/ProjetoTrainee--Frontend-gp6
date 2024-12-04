@@ -6,5 +6,9 @@
 # depois de criar a pagina de login, tenho que botar no href no botao de login na pagina de feed deslogado.
 
 
+# DESCOBRIR COMO NOMEAR CLASSES PARA NAO FICAR REPETINDO CODIGO
+
+
+
 ----------------------------------------------------------------
 
