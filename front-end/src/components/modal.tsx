@@ -10,8 +10,8 @@ if(!isOpen) return null;
 
 return(
     <div className="fixed inset-0 z-50 flex items-center justify-center mx-auto max-w-3xl w-full">
-        <div className="absolute inset-0 opacity-100">
-            <div className="bg-green-800 relative z-10 h-full max-h-[680p] w-full max-w-6x1 overflow-y-auto bg-white p-6 md:rounded-lg">{/*conteudo modal*/}
+        <div className="bg-green-700 absolute inset-0 opacity-100">
+            <div className="relative z-10 h-full max-h-[680p] w-full max-w-6x1 overflow-y-auto  p-6 md:rounded-lg">{/*conteudo modal*/}
             
                 <button
                 type='button'
