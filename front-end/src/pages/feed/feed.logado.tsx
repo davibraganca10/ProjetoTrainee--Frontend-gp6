@@ -1,10 +1,11 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import Header from '@/components/header'
 import Card from '@/components/card_prof'
 import Ordenar from '@/components/ordenar_prof'
 import { Professor } from '../api/types'
+import HeaderLogado from '@/components/header.logado'
+import NovaPublicacao from '@/components/nova.publicacao'
 
 const FeedDeslogado = () => {
   
@@ -35,7 +36,7 @@ const FeedDeslogado = () => {
 
     <main >
 
-      <Header />  {/* criei funcao pq pode ser reutilizado */}
+      <HeaderLogado />  {/* criei funcao pq pode ser reutilizado */}
       <section className="bg-corFundo w-full h-full py-3 px-0 ">
         <div className="flex flex-col justify-evenly gap-y-2 gap-x-2 px-0">
           <div className="flex items-center justify-between gap-x-24 py-6 px-64">
@@ -51,21 +52,41 @@ const FeedDeslogado = () => {
                 image="/rick.png"
                 name="Rick Sanchez"
                 role="Segurança Computacional"
-              />
+            />
+            <Card 
+                image="/perfil.png"
+                name="Rick Sanchez"
+                role="Segurança Computacional"
+            />
+            <Card 
+                image="/perfil.png"
+                name="Rick Sanchez"
+                role="Segurança Computacional"
+            />
+            <Card 
+                image="/perfil.png"
+                name="Rick Sanchez"
+                role="Segurança Computacional"
+            />
             {professores.map((professor) => (
               <Card key={professor.id}
                 image="/rick.png"
                 name={professor.nome}
                 role={professor.departamento}
               />
+              
             ))}
+
           </div>
 
           <hr className="border-gray-600 my-8 mx-20" />
 
           <div className="flex items-center justify-between gap-x-24 py-6 px-64">
             <h1 className="text-2xl text-black font-fontAll">Todos os professores</h1>
-            <Ordenar />
+            <div className='flex flex-row justify-end'>
+                <NovaPublicacao/>
+                <Ordenar />
+            </div>
             
           </div>
 

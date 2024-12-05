@@ -9,7 +9,7 @@ const Ordenar = () => {
     <div className="relative">
       <button
         onClick={alternar}
-        className="bg-corBotaoLogin font-fontAll text-white text-lg px-6 py-1 mr-7 border-white border-2 rounded-xl hover:bg-blue-500 transition-all drop-shadow-2xl">
+        className="bg-corBotaoLogin font-fontAll text-white text-lg px-4 py-1 mr-7 border-white border-2 rounded-xl hover:bg-blue-500 transition-all drop-shadow-2xl">
         Ordenar
       </button>
 
