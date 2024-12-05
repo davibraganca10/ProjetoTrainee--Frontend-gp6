@@ -6,15 +6,15 @@ const login = () => {
   return (
     <>
       {/*Imagem*/}
-      <div className="float-left bg-gray-200">
-        <Image src="/telaLogin.png" alt="imagem" width={500} height={300} className="object-contain"/>
+      <div className="size-1/2 float-left flex bg-gray-300">
+        <img src="/telaLogin.png" alt="imagem" className="h-screen w-full size-full"/>
       </div>
 
-      <div className="min-h-screen flex items-center justify-center bg-gray-200">
-      <div className="p-6 rounded-lg  w-full max-w-sm">
+      <div className="size-1/2 float-right min-h-screen flex items-center justify-center bg-gray-200">
+      <div className="p-6 rounded-lg justify-center w-full max-w-sm">
         {/*Titulo*/}
-        <div className="w-2/3 object-right flex flex-col justify-center items-center p-8">
-          <h1 className='text-black'>Avaliação de Professores</h1>
+        <div className="text-3xl text-black font-fontAll">
+          <h1 className='text-black text-center'>Avaliação de Professores</h1>
         </div>
 
         <div className="p-6 rounded-lg w-full max-w-sm">
@@ -38,9 +38,9 @@ const login = () => {
         </div>
 
         {/*Botoes*/}
-        <div  className="space-x-0">
-        <button className="m-10 shadow-md mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Criar Conta")}>Entrar</button>
-          <button className="shadow-md mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Entrar")}><Link href={"/entrar/cadastro"}>Criar Conta</Link></button>
+        <div className="justify-center w-full max-w-sm flex space-x-12">
+          <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Criar Conta")}>Entrar</button>
+          <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Entrar")}><Link href={"/entrar/cadastro"}>Criar Conta</Link></button>
         </div>
       </div>
       </div>
