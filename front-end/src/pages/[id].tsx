@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '@/components/header';
 import Image from 'next/image';
 import Link from 'next/link';
+
 function Perfil(){
     const router = useRouter();
     const { id } = router.query;
@@ -25,7 +26,7 @@ function Perfil(){
             </div>
             <hr className="flex justify-center items-center w-2xl "></hr>
             <div className='grid place-items-center w-full'>
-          
+                
                 <div className="p-4 bg-green-300 my-5 rounded-lg">
                 <div className='flex flex-row items-center justify-center  '>
                 <h1 className='text-bold'>Usuário exemplo</h1>
@@ -35,6 +36,7 @@ function Perfil(){
                 <p className='text-sm p-4 flex flex-col justify-center items-center'> avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuárioavaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário</p>
                 <p className='text-gray-600'>comentários</p>
                 </div>
+                
                 <div className='p-4 bg-green-300 my-5 rounded-lg'>
                 <div className='flex flex-row items-center justify-center'>
                 <h1 className='text-bold'>Usuário exemplo</h1>

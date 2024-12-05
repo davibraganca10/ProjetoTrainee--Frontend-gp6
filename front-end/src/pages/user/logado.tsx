@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 //import Header from '@/components/header'
 import Link from 'next/link';
 import Image from 'next/image';
+import { Modal } from '@/components/modal';
+import InputsCadastro from '@/components/Inputscadastro';
 
 export default function UserLogado(){
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  function handleOpenModal(){
+    setModalIsOpen(!modalIsOpen)
+  }
+
     return <main>
       {/*Recriei o Header, mas adaptando o Login para Deslogar*/ }
  <header className="bg-verde_unb h-20 flex items-center justify-between px-4">
@@ -21,7 +28,7 @@ export default function UserLogado(){
               <h2 className='text-lg ml-4'>Cic</h2> 
               <h2 className='text-lg ml-4'>exemplo@unb.br</h2>
               <button className="ml-12 mr-4 mt-5 px-5 py-2 bg-red-400 text-white rounded hover:bg-red-500 transition-all" onClick={()=> console.log("Clidado Excluir Conta")}>Excluir</button>
-              <button className="ml-12 mr-4 mt-5 px-5 py-2 bg-blue-400 text-white rounded hover:bg-blue-500 transition-all" onClick={()=> console.log("Clidado Editar Conta")}>Editar</button>
+              <button className="ml-12 mr-4 mt-5 px-5 py-2 bg-blue-400 text-white rounded hover:bg-blue-500 transition-all" onClick={handleOpenModal}>Editar</button>
             </div>
           </div>
            <hr className="flex justify-center items-center w-2xl "></hr>
@@ -55,6 +62,40 @@ export default function UserLogado(){
             </div>
           </div>
         </div>
+        <Modal isOpen={modalIsOpen} onClose={handleOpenModal}>
+        <div className='mb-6 border-b border-blue-200 py-6 text-center'>
+                    <div className='mt-6'>
+                        <h2 className='text-3xl font-semibold text-white'>Editar perfil</h2>
+                    </div>
+                </div>
+                <div className='flex flex-col items-center justify-center'>
+                <div className="p-6 rounded-lg w-full max-w-sm">     
+        <InputsCadastro />
+        <div className='mb-4'>
+            <input
+              type="password"
+              placeholder="Senha atual"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+        <div className='mb-4'>
+            <input
+              type="password"
+              placeholder="Nova senha"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Confirmar nova senha"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+        </div>
+        <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Confirmar")}>Confirmar</button>
+        </div>
+        </Modal>
     </main>
 }
 
