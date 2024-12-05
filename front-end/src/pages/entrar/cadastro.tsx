@@ -62,7 +62,7 @@ const cadastro = () => {
 
         {/*Botoes*/}
         <div  className="space-x-0">
-          <button className="shadow-md mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Criar Conta")}>Criar Conta</button>
+          <button className="shadow-md mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400" onClick={()=> console.log("Clicado Criar Conta")}>Criar Conta</button>
         </div>
       </div>
       </div>

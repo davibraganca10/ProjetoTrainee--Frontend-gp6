@@ -39,8 +39,8 @@ const login = () => {
 
         {/*Botoes*/}
         <div  className="space-x-0">
-        <button className="m-10 shadow-md mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Criar Conta")}>Entrar</button>
-          <button className="shadow-md mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Entrar")}><Link href={"/entrar/cadastro"}>Criar Conta</Link></button>
+        <button className="m-10 shadow-md mt-4 px-5 py-2 bg-green-400 text-white rounded hover:bg-blue-400 transition-all" onClick={()=> console.log("Clicado Criar Conta")}>Entrar</button>
+          <button className="shadow-md mt-4 px-4 py-2 bg-green-400 text-white rounded hover:bg-blue-400 transition-all" onClick={()=> console.log("Clicado Entrar")}><Link href={"/entrar/cadastro"}>Criar Conta</Link></button>
         </div>
       </div>
       </div>
