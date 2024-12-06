@@ -31,7 +31,7 @@ export default function UserLogado(){
       </header>
         <div className="max-w-2xl mx-auto p-6 bg-white border border-gray-300 rounded-xl shadow-md">
           <div className='flex flex-col items-center justify-center justify-between'>
-            <div className='bg-green-100 py-6 w-full rounded py-3'>
+            <div className='bg-green-100 py-8 w-full rounded '>
               <div className='flex flex-col ml-4 float-left'>
                 {/*criei o component perfil pra colocar a imagem e os dados do user */}
                 <Perfil
