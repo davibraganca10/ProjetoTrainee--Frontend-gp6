@@ -1,16 +1,22 @@
 import React from 'react'
 import Header from '@/components/header'
+import Perfil from '@/components/perfil'
 
 
 export default function UserDeslogado(){
     return <main>
         <Header />
-        <div className="max-w-lg mx-auto p-6 bg-white border border-gray-300 rounded-lg shadow-md">
-        <div className='flex flex-col items-center justify-center'>
-            <div className='bg-green-100 w-full py-3'>
-            <h1 className='text-2xl ml-4'>Usuário exemplo</h1>
-            <h2 className='text-lg ml-4'>Cic</h2>
-            <h2 className='text-lg ml-4'>exemplo@unb.br</h2>
+        <div className="max-w-2xl mx-auto p-6 bg-white border border-gray-300 rounded-lg shadow-md">
+        <div className='w-full'>
+            <div className='bg-green-100 float-left w-full rounded py-3'>
+            <div className='ml-5 float-left'>
+            <Perfil
+            image='/morty.png'
+            name='Morty  Gamer'
+            curso='Ciencia da Computação'
+            email='morty.gamer@cjr.org.br'
+            ></Perfil>
+            </div>
             </div>
             </div>
             <hr className="flex justify-center items-center w-2xl "></hr>

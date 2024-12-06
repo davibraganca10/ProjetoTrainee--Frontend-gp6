@@ -16,9 +16,11 @@ const Perfil: React.FC<Param> = ({ image, name, curso, email }) => (
         
       </div>
       <div className='flex ml-10 text-center justify-center flex-col'>
-      <Image src='/carta.png' alt='' width={40} height={20} />
-      <h2 className="text-lg font-bold font-lg text-gray-700">{name}</h2>
-      <p className="text-gray-800 mt-2 text-sm">{curso}</p>
+      <h2 className="text-lg font-bold left-0 font-lg text-gray-700">{name}</h2>
+      <div className='flex gap-x-2'>
+        <Image src='/carta.png' alt='' width={25} height={5} />
+        <p className="text-gray-800 mt-2 mb-2 text-sm">{curso}</p>
+      </div>
       <p className='text-gray-800 mt-1 text-sm'>{email}</p>
     </div></div>
   );
