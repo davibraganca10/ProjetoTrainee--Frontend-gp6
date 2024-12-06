@@ -5,19 +5,22 @@ interface Param {
     image: string; 
     name: string;  
     curso: string;
+    email: string;
       
   }
 
-const perfil: React.FC<Param> = ({ image, name, curso }) => (
-    <div className="w-38 h-46 bg-white rounded-xl flex shadow-lg p-4 text-center overflow-hidden">
+const Perfil: React.FC<Param> = ({ image, name, curso, email }) => (
+    <div className="rounded-xl flex text-center overflow-hidden">
       <div className="w-28 h-24 mx-auto mb-4">
         <Image src={image} alt='' width={64} height={96} layout="responsive"/>
         
       </div>
-      <div className='flex flex-col'>
-      <h2 className="text-lg font-bold text-gray-800">{name}</h2>
-      <p className="text-gray-500 text-sm">{curso}</p>
+      <div className='flex ml-10 text-center justify-center flex-col'>
+      <Image src='/carta.png' alt='' width={40} height={20} />
+      <h2 className="text-lg font-bold font-lg text-gray-700">{name}</h2>
+      <p className="text-gray-800 mt-2 text-sm">{curso}</p>
+      <p className='text-gray-800 mt-1 text-sm'>{email}</p>
     </div></div>
   );
 
-export default perfil;
+export default Perfil;

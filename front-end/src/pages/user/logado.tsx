@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Modal } from '@/components/modal';
 import InputsCadastro from '@/components/Inputscadastro';
+import Perfil from '@/components/perfil';
 
 export default function UserLogado(){
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -17,17 +18,20 @@ export default function UserLogado(){
       <Link href="/feed" className="ml-3">
         <Image src="/unb_logo.png" alt="logo unb" width={100} height={50} layout="responsive"/>
       </Link>
-      <Link href="/feed" className="mr-3">
-      <Image src="/icone_porta.png" alt="" width={40} height={20} />
+      <Link href="/feed" className="mr-4">
+      <Image src="/sair.png" alt="" width={35} height={25} />
       </Link>
     </header>
-        <div className="max-w-lg mx-auto p-6 bg-white border border-gray-300 rounded-xl shadow-md">
+        <div className="max-w-2xl mx-auto p-6 bg-white border border-gray-300 rounded-xl shadow-md">
           <div className='flex flex-col items-center justify-center justify-between'>
             <div className='bg-green-100 w-full rounded py-3'>
-              <div className='flex flex-col float-left'>
-             <h1 className='float-left text-2xl ml-4'>Usuário exemplo</h1>
-              <h2 className='float-left text-lg ml-4'>Cic</h2> 
-              <h2 className='float-left text-lg ml-4'>exemplo@unb.br</h2>
+              <div className='flex flex-col ml-4 float-left'>
+              <Perfil
+              image="/morty.png"
+              name="Morty Gamer"
+              curso="Ciencia da Computação"
+              email="morty.gamer@cjr.org.br">
+              </Perfil> 
               </div>
               {/*Criei os botões para editar o perfil e para excluí-lo*/}
               <div className="flex-col flex py-2 float-right">
@@ -67,8 +71,8 @@ export default function UserLogado(){
           </div>
         </div>
         <Modal isOpen={modalIsOpen} onClose={handleOpenModal}>
-        <div className='mb-6 border-b border-blue-200 py-6 text-center'>
-                    <div className='mt-6'>
+        <div className='mb-6 border-b border-blue-200 py-7 text-center'>
+                    <div className='mt-5'>
                         <h2 className='text-3xl font-semibold text-white'>Editar perfil</h2>
                     </div>
                 </div>
@@ -97,7 +101,7 @@ export default function UserLogado(){
             />
           </div>
         </div>
-        <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={()=> console.log("Clicado Confirmar")}>Confirmar</button>
+        <button className="w-1/3 shadow-md mt-4 py-2 bg-green-400 text-white rounded hover:bg-blue-400 transition-all" onClick={()=> console.log("Clicado Confirmar")}>Confirmar</button>
         </div>
         </Modal>
     </main>
