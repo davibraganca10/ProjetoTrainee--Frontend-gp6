@@ -24,12 +24,16 @@ export default function UserLogado(){
         <div className="max-w-lg mx-auto p-6 bg-white border border-gray-300 rounded-xl shadow-md">
           <div className='flex flex-col items-center justify-center justify-between'>
             <div className='bg-green-100 w-full rounded py-3'>
-             <h1 className='text-2xl ml-4'>Usuário exemplo</h1>
-              <h2 className='text-lg ml-4'>Cic</h2> 
-              <h2 className='text-lg ml-4'>exemplo@unb.br</h2>
-              <button className="ml-12 mr-4 mt-5 px-5 py-2 bg-red-400 text-white rounded hover:bg-red-500 transition-all" onClick={()=> console.log("Clidado Excluir Conta")}>Excluir</button>
-              <button className="ml-12 mr-4 mt-5 px-5 py-2 bg-blue-400 text-white rounded hover:bg-blue-500 transition-all" onClick={handleOpenModal}>Editar</button>
-            </div>
+              <div className='flex flex-col float-left'>
+             <h1 className='float-left text-2xl ml-4'>Usuário exemplo</h1>
+              <h2 className='float-left text-lg ml-4'>Cic</h2> 
+              <h2 className='float-left text-lg ml-4'>exemplo@unb.br</h2>
+              </div>
+              {/*Criei os botões para editar o perfil e para excluí-lo*/}
+              <div className="flex-col flex py-2 float-right">
+              <button className="ml-12 mr-5 mt- px-5 py-1.5 bg-red-400 text-white rounded hover:bg-red-500 transition-all" onClick={()=> console.log("Clidado Excluir Conta")}>Excluir</button>
+              <button className="ml-12 mr-5 mt-5 px-5 py-1.5 bg-blue-400 text-white rounded hover:bg-blue-500 transition-all" onClick={handleOpenModal}>Editar</button>
+            </div></div>
           </div>
            <hr className="flex justify-center items-center w-2xl "></hr>
            <div className='grid place-items-center w-full'>
