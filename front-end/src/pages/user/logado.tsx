@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Modal } from '@/components/modal';
 import InputsCadastro from '@/components/Inputscadastro';
 import Perfil from '@/components/perfil';
-import Post from '@/components/posts';
+import PostLogado from '@/components/postLogado';
 
 export default function UserLogado(){
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -21,6 +21,7 @@ export default function UserLogado(){
         </Link>
         <div className='flex gap-x-4'>
           <Link href=''>
+            {/*adicionei o botão de notificação e de saída*/}
             <Image src="/notificacao.png" alt='notificação' width={30} height={30} />
           </Link>
           <Link href="/feed" className="mr-4">
@@ -48,30 +49,31 @@ export default function UserLogado(){
             </div>
           </div>
           <div className='grid place-items-center w-full'>
-            <Post
+            {/*Fiz o component PostLogado pra ver as postagens enquanto logado*/}
+            <PostLogado
               user='Bruce Wayne'
               data='16/07'
               hora='16:07'
               professor='Jacinto Pinto'
               departamento='Dpt do Amor'
               conteudo='Avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário'>
-            </Post>
-            <Post
+            </PostLogado>
+            <PostLogado
               user='Billy Batson'
               data='17/08'
               hora='17:08'
               professor='Paula Tejano'
               departamento='Fisioterapia'
               conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
-            </Post>
-            <Post
+            </PostLogado>
+            <PostLogado
               user='Barry Allen'
               data='18/09'
               hora='18:09'
               professor='Deide Costa'
               departamento='Massagem'
               conteudo='Avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário'>
-            </Post>
+            </PostLogado>
           </div>
         </div>
         {/*Chama o Modal para edição do usuário*/}

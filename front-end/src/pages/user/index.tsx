@@ -23,6 +23,7 @@ export default function UserDeslogado(){
             </div>
             <hr className="flex justify-center items-center w-2xl "></hr>
             <div className='grid place-items-center w-full'>
+                    {/*Criei o Post para ver as postagens*/}
                 <Post
                     user='Billy Batson'
                     data='17/08'

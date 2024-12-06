@@ -12,7 +12,7 @@ interface Dados {
 }
 
 
-const Post: React.FC<Dados> = ({ conteudo, user, data, hora, professor, departamento }) => (
+const PostLogado: React.FC<Dados> = ({ conteudo, user, data, hora, professor, departamento }) => (
     <>
     <div className=" w-full bg-green-300 my-5 py-5 rounded-lg">
         <div className='flex flex-col justify-center items-center text-center'>
@@ -28,11 +28,19 @@ const Post: React.FC<Dados> = ({ conteudo, user, data, hora, professor, departam
             <div className='flex gap-x-2 ml-8'>
                 <Image className='' src='/chat.png' alt='' width={30} height={20}/>
                 <button className='justify-center text-gray-500'onClick={()=> console.log("Abre os comentários")}>Comentarios</button>
-            </div>
+            </div>          
+            <div className='mr-8 flex gap-x-3'>
+                <button onClick={()=> console.log('Editar postagem')}>
+                    <Image src='/editar.png' alt='' width={18} height={20}/>
+                </button>
+                <button onClick={() => console.log('Excluir postagem')}>
+                    <Image src='/lixeira.png' alt='' width={20} height={20}/>
+                </button>
+            </div>  
         </div>
     </div>
     </>
 
 );
 
-export default Post;
+export default PostLogado;
