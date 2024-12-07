@@ -3,12 +3,12 @@ import Perfil from './perfil'
 import Image from 'next/image'
 import { Modal } from './modal'
 interface Dados {
-    user:string
-    data: string;
-    hora: string;
-    professor: string;
-    departamento: string;
-    conteudo: string;
+  user:string
+  data: string;
+  hora: string;
+  professor: string;
+  departamento: string;
+  conteudo: string;
 }
 
 
