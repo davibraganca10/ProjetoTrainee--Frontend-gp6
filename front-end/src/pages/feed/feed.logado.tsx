@@ -7,6 +7,7 @@ import { Professor } from '../api/types'
 import HeaderLogado from '@/components/header.logado'
 import NovaPublicacao from '@/components/nova.publicacao'
 
+
 const FeedDeslogado = () => {
   
   const [professores, setProfessores] = useState<Professor[]>([]) 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ModalNovaPub } from './modal.nova.publicacao';
 
 const NovaPublicacao = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,12 +14,11 @@ const NovaPublicacao = () => {
         Nova Publicação
       </button>
 
-      {isOpen && (
-        <div>
-            <h1>hehe</h1>
-        </div>
+      <ModalNovaPub isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <h2 className="text-white text-xl">Nova Publicação</h2>
+        <p className="text-white">Aqui vai o conteúdo do seu modal.</p>
         
-      )}
+      </ModalNovaPub>
     </div>
   );
 };
