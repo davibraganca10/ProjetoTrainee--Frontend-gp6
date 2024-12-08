@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import Comentario from '@/components/comentario'
 import { Modal } from './modal'
 interface Dados {
   user:string
@@ -32,7 +33,8 @@ const PostLogado: React.FC<Dados> = ({ conteudo, user, data, hora, professor, de
         <div className='justify-between flex'>
             <div className='flex gap-x-2 ml-8'>
                 <Image className='' src='/chat.png' alt='' width={30} height={20}/>
-                <button className='justify-center text-gray-500'onClick={()=> console.log("Abre os comentários")}>Comentarios</button>
+                {/*Chama o modal de Comentario*/}
+                <Comentario/>
             </div>          
             <div className='mr-8 flex gap-x-3'>
               <button onClick={()=> console.log('Editar postagem')}>
