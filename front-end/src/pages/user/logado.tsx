@@ -16,7 +16,7 @@ export default function UserLogado(){
     return <main>
       {/*Recriei o Header, mas adaptando o Login para Deslogar*/ }
       <header className="bg-verde_unb h-20 flex items-center justify-between px-4">
-        <Link href="/feed" className="ml-3">
+        <Link  href="/feed" className="ml-3">
         <Image src="/unb_logo.png" alt="logo unb" width={100} height={50} layout="responsive"/>
         </Link>
         <div className='flex gap-x-4'>
@@ -50,7 +50,8 @@ export default function UserLogado(){
             </div>
             </div>
           </div>
-          <div className='grid place-items-center w-full p-4'>
+            <h1 className='font-bold text-lg text-xl px-4 mt-2'>Publicações</h1>
+          <div className='grid place-items-center w-full px-4'>
             {/*Fiz o component PostLogado pra ver as postagens enquanto logado*/}
             <PostLogado
               user='Bruce Wayne'
