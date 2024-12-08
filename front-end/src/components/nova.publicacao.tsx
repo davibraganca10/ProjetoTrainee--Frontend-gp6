@@ -33,7 +33,7 @@ const NovaPublicacao = () => {
               className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
             </div>
-        <textarea className='bg-green-100 flex flex-center items-center justify-center w-full h-60'
+        <textarea className='rounded-md py-3 px-4 bg-green-100 flex flex-center items-center justify-center w-full h-60 transition-all'
         placeholder='Escreva aqui'></textarea>
        <div className='flex justify-center'>
       <button className="flex justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=> console.log("Clicado avaliar")}>Publicar</button>
