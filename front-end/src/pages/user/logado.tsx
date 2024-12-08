@@ -16,7 +16,7 @@ export default function UserLogado(){
     return <main>
       {/*Recriei o Header, mas adaptando o Login para Deslogar*/ }
       <header className="bg-verde_unb h-20 flex items-center justify-between px-4">
-        <Link href="/feed" className="ml-3">
+        <Link  href="/feed" className="ml-3">
         <Image src="/unb_logo.png" alt="logo unb" width={100} height={50} layout="responsive"/>
         </Link>
         <div className='flex gap-x-4'>
@@ -29,26 +29,29 @@ export default function UserLogado(){
           </Link>
         </div>
       </header>
-        <div className="max-w-2xl mx-auto p-6 bg-white border border-gray-300 rounded-xl shadow-md">
+        <div className="max-w-xl mx-auto bg-white rounded border border-gray-300 shadow-md">
           <div className='flex flex-col items-center justify-center justify-between'>
-            <div className='bg-green-100 py-8 w-full rounded '>
+            <div className='w-full border-2 border-gray-200'>
+              <div className='h-32 float-top bg-green-400 rounded py-10 w-full'>
               <div className='flex flex-col ml-4 float-left'>
                 {/*criei o component perfil pra colocar a imagem e os dados do user */}
-                <Perfil
+                <div className='py-4'><Perfil
                   image="/morty.png"
                   name="Morty Gamer"  
                   curso="Ciencia da Computação"
                   email="morty.gamer@cjr.org.br">
                 </Perfil> 
-              </div>
+              </div></div>
                {/*Criei os botões para editar o perfil e para excluí-lo*/}
               <div className="flex-col flex py-2 float-right">
-                <button className="ml-12 mr-5 mt- px-5 py-1.5 bg-red-400 text-white rounded hover:bg-red-500 transition-all" onClick={()=> console.log("Clidado Excluir Conta")}>Excluir</button>
-                <button className="ml-12 mr-5 mt-5 px-5 py-1.5 bg-blue-400 text-white rounded hover:bg-blue-500 transition-all" onClick={handleOpenModal}>Editar</button>
+                <button className="ml-12 mr-6 mt-24 px-5 py-1.5 bg-red-400 text-white rounded hover:bg-red-500 transition-all" onClick={()=> console.log("Clidado Excluir Conta")}>Excluir Perfil</button>
+                <button className="ml-12 mr-6 mt-5 px-5 py-1.5 bg-blue-400 text-white rounded hover:bg-blue-500 transition-all" onClick={handleOpenModal}>Editar Perfil</button>
               </div>
             </div>
+            </div>
           </div>
-          <div className='grid place-items-center w-full'>
+            <h1 className='font-bold text-lg text-xl px-4 mt-2'>Publicações</h1>
+          <div className='grid place-items-center w-full px-4'>
             {/*Fiz o component PostLogado pra ver as postagens enquanto logado*/}
             <PostLogado
               user='Bruce Wayne'

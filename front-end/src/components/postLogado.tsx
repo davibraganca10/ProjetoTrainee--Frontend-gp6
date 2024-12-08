@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Perfil from './perfil'
 import Image from 'next/image'
 import { Modal } from './modal'
 interface Dados {

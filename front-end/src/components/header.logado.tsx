@@ -19,7 +19,7 @@ const HeaderLogado = () => {
           <Link href="/user/logado" className='mr-4'>
             <Image src="/morty.png" alt="morty" width={16} height={16} layout="responsive" />
           </Link>
-          <Link href="" className='mr-4'>
+          <Link href="/feed" className='mr-4'>
             <Image src="/sair.png" alt="sair" width={16} height={16} layout="responsive"/>
           </Link>
         </div>
