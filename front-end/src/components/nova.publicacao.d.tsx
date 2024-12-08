@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ModalNovaPub } from './modal.nova.publicacao';
 
-const NovaPublicacao = () => {
+const NovaPublicacaoModal = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   function handleOpenModal(){
     setModalIsOpen(!modalIsOpen)
@@ -23,4 +23,4 @@ const NovaPublicacao = () => {
   );
 };
 
-export default NovaPublicacao;
+export default NovaPublicacaoModal;
