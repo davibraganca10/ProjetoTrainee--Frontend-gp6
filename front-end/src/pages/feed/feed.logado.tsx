@@ -7,7 +7,7 @@ import { Professor } from '../api/types'
 import HeaderLogado from '@/components/header.logado'
 //import NovaPublicacao from '@/components/nova.publicacao'
 import NovaPublicacaoModal from '@/components/nova.publicacao.d'
-import NovaPublicacao from '@/components/nova.publicacao'
+//import NovaPublicacao from '@/components/nova.publicacao'
 
 
 const FeedDeslogado = () => {
@@ -87,7 +87,7 @@ const FeedDeslogado = () => {
           <div className="flex items-center justify-between gap-x-24 py-6 px-64">
             <h1 className="text-2xl text-black font-fontAll">Todos os professores</h1>
             <div className='flex flex-row justify-end'>
-                <NovaPublicacao/>
+                <NovaPublicacaoModal/>
                 <Ordenar />
             </div>
             

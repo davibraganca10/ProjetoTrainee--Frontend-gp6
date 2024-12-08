@@ -9,7 +9,7 @@
 
         return(
             <div className="fixed inset-0 z-50 flex items-center justify-center mx-auto max-w-3xl w-full">
-                <div className="bg-corModal h-full max-h-[70vh] w-full max-w-3xl p-6 rounded-lg shadow-lg overflow-y-auto">
+                <div className="bg-corModal h-full max-h-[80vh] w-full max-w-3xl p-6 rounded-lg shadow-lg overflow-y-auto">
                     <div className="relative z-10 h-full max-h-[680p] w-full max-w-6x1 overflow-y-auto  p-6 md:rounded-lg">{/*conteudo modal*/}
                     
                         <button
@@ -18,7 +18,7 @@
                         onClick={onClose}
                         >
                             X
-                        </button>
+                        </button> 
                         <div className=''>{children}</div>
                     </div>
                 </div>
