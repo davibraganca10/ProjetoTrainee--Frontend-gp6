@@ -8,7 +8,7 @@ export default function UserDeslogado(){
   return <main>
     <Header />
       <div className="max-w-xl mx-auto bg-white border border-gray-300 rounded-lg shadow-md">
-      <div className='flex flex-col items-center justify-center justify-between'>
+      <div className='flex flex-col'>
             <div className='w-full border-2 border-gray-200'>
               <div className='h-32 float-top bg-green-400 rounded py-10 w-full'>
               <div className='flex flex-col ml-4 float-left'>
@@ -23,7 +23,8 @@ export default function UserDeslogado(){
             </div>
           </div>
         <hr className="flex justify-center items-center w-2xl "></hr>
-        <div className='grid place-items-center w-full p-4'>
+        <h1 className='font-bold text-lg text-xl px-4 mt-2'>Publicações</h1>
+        <div className='grid place-items-center w-full px-4'>
           {/*Criei o Post para ver as postagens*/}
           <Post
             user='Billy Batson'

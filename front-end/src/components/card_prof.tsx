@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Parametros {
     image: string; 
@@ -13,7 +14,7 @@ const Card: React.FC<Parametros> = ({ image, name, role }) => (
         <Image src={image} alt={name} width={64} height={96} layout="responsive"/>
         
       </div>
-      <h2 className="text-lg font-bold text-gray-800">{name}</h2>
+      <Link href='/user'><h2 className="text-lg font-bold text-gray-800">{name}</h2></Link>
       <p className="text-gray-500 text-sm">{role}</p>
     </div>
   );
