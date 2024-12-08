@@ -1,8 +1,34 @@
+"use client"
+
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import InputsCadastro from '@/components/Inputscadastro';
+import { Usuario } from '../api/types'
 
 const cadastro = () => {
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]) 
+  const [loading, setLoading] = useState(true)
+  
+  useEffect(() => {
+    async function getUsuarios() {
+      try{
+        const response = await fetch("http://localhost:3333/user")
+        if (response) {
+          console.log(response)
+          const data = await response.json()
+          console.log(data)
+          setUsuarios(data)
+          setLoading(false)
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    if (loading) {
+      getUsuarios()
+    }
+  })
+
   return (
     <>
       {/*Imagem*/}
