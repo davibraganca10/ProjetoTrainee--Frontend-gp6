@@ -5,7 +5,7 @@ import Card from '@/components/card_prof'
 import Ordenar from '@/components/ordenar_prof'
 import { Professor } from '../api/types'
 import HeaderLogado from '@/components/header.logado'
-// import NovaPublicacao from '@/components/nova.publicacao'
+//import NovaPublicacao from '@/components/nova.publicacao'
 import NovaPublicacaoModal from '@/components/nova.publicacao.d'
 
 
