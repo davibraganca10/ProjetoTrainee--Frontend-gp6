@@ -20,9 +20,7 @@ const FeedDeslogado = () => {
       try{
         const response = await fetch("http://localhost:3333/professor")
         if (response) {
-          console.log(response)
           const data = await response.json()
-          console.log(data)
           setProfessores(data)
           setLoading(false)
         }
