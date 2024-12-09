@@ -14,7 +14,7 @@
                     
                         <button
                         type='button'
-                        className='absolute right-0 top-0 m-4 text-white transition-all hover:text-red-400'
+                        className='absolute right-0 top-0 m-4 text-white text-xl transition-all hover:text-red-400'
                         onClick={onClose}
                         >
                             X
