@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Comentario from '@/components/comentario'
 import { Modal } from './modal'
 interface Dados {
-  user:string
+  user:string | null;
   data: string;
   hora: string;
   professor: string;

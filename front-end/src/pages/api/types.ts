@@ -6,7 +6,7 @@ export type Professor = {
     updatedAt: Date,
   }
 
-export type Usuario = {
+export type User = {
     id: number,
     nome: string,
     email: string,

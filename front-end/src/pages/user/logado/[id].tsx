@@ -1,13 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 //import Header from '@/components/header'
 import Link from 'next/link';
 import Image from 'next/image';
-import { Modal } from '@/components/modal';
-import InputsCadastro from '@/components/Inputscadastro';
-import Perfil from '@/components/perfil';
-import PostLogado from '@/components/postLogado';
+import { Modal } from '../../../components/modal'
+import InputsCadastro from '../../../components/Inputscadastro';
+import Perfil from '../../../components/perfil';
+import PostLogado from '../../../components/postLogado';
+import {getUser} from '../../../utils/api'
+import { useRouter } from 'next/router';
+import { User } from '../../api/types'
+import { useParams } from 'next/navigation'
 
 export default function UserLogado(){
+  const [usuario, setUser] = useState<User | null>(null) 
+  const [, setLoading] = useState(true)
+  const  params  = useParams();
+  const id = params ? params.id : null
+  const router = useRouter();
+  const GetOneUser = async () => {
+    try {
+      const usuario=await getUser(Number(id))
+      setUser(usuario)
+      
+      
+    } 
+    catch (error) {
+      router.push('/')
+      
+  }
+  finally{
+    setLoading(false)
+  }
+}
+  useEffect(() => {
+    GetOneUser()
+    
+  },)
   const [modalIsOpen, setModalIsOpen] = useState(false);
   function handleOpenModal(){
     setModalIsOpen(!modalIsOpen)
@@ -37,9 +65,9 @@ export default function UserLogado(){
                 {/*criei o component perfil pra colocar a imagem e os dados do user */}
                 <div className='py-4'><Perfil
                   image="/morty.png"
-                  name="Morty Gamer"  
-                  curso="Ciencia da Computação"
-                  email="morty.gamer@cjr.org.br">
+                  name={usuario && usuario.nome} 
+                  curso={usuario && usuario.curso}
+                  email={usuario && usuario.email}>
                 </Perfil> 
               </div></div>
                {/*Criei os botões para editar o perfil e para excluí-lo*/}
@@ -54,7 +82,7 @@ export default function UserLogado(){
           <div className='grid place-items-center w-full px-4'>
             {/*Fiz o component PostLogado pra ver as postagens enquanto logado*/}
             <PostLogado
-              user='Bruce Wayne'
+              user={usuario && usuario.nome}
               data='16/07'
               hora='16:07'
               professor='Jacinto Pinto'
@@ -62,7 +90,7 @@ export default function UserLogado(){
               conteudo='Avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário'>
             </PostLogado>
             <PostLogado
-              user='Billy Batson'
+              user={usuario && usuario.nome}
               data='17/08'
               hora='17:08'
               professor='Paula Tejano'
@@ -70,7 +98,7 @@ export default function UserLogado(){
               conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
             </PostLogado>
             <PostLogado
-              user='Barry Allen'
+              user={usuario && usuario.nome}
               data='18/09'
               hora='18:09'
               professor='Deide Costa'

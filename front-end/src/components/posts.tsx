@@ -3,12 +3,12 @@ import Perfil from './perfil'
 import Image from 'next/image'
 
 interface Dados {
-  user:string
-  data: string;
-  hora: string;
-  professor: string;
-  departamento: string;
-  conteudo: string;
+  user:string | null;
+  data: string | null;
+  hora: string | null;
+  professor: string | null;
+  departamento: string | null;
+  conteudo: string | null;
 }
 
 

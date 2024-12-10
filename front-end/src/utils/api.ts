@@ -1,3 +1,4 @@
+import { User } from '@/pages/api/types';
 import axios from 'axios';
 
 const api = axios.create({
@@ -5,6 +6,10 @@ const api = axios.create({
 })
 
 
-export const getUser = async() => {
-    await api.get("/user/");
+
+export const getUser = async (id: number): Promise<User> => {
+    const response = await api.get(`/user/${id}`);
+    return response.data;
 }
+  
+  

@@ -4,30 +4,35 @@ import Header from '../../../components/header'
 import Perfil from '../../../components/perfil'
 import Post from '../../../components/posts'
 import { useRouter } from 'next/router';
-import { Usuario } from '../../api/types'
+import { User } from '../../api/types'
+import { getUser } from '@/utils/api'
+import { useParams } from 'next/navigation'
+
 export default function UserDeslogado(){
-  const router = useRouter();
-    const { id } = router.query;
-    const [usuario, setUser] = useState<Usuario[]>([]) 
-    const [loading, setLoading] = useState(true)
-    
+    const [usuario, setUser] = useState<User | null>(null) 
+    const [, setLoading] = useState(true)
+    const  params  = useParams();
+    const id = params ? params.id : null
+    const router = useRouter();
+    const GetOneUser = async () => {
+      try {
+        const usuario=await getUser(Number(id))
+        setUser(usuario)
+        
+        
+      } 
+      catch (error) {
+        router.push('/')
+        
+    }
+    finally{
+      setLoading(false)
+    }
+  }
     useEffect(() => {
-      async function getUser() {
-        try{
-          const response = await fetch(`http://localhost:3333/user/${id}`)
-          if (response) {
-            const data = await response.json()
-            setUser(data)
-            setLoading(false)
-          }
-        } catch (err) {
-          console.error(err)
-        }
-      }
-      if (loading) {
-        getUser()
-      }
-    })
+      GetOneUser()
+      
+    },)
   
   return <main>
     <Header />
@@ -39,15 +44,15 @@ export default function UserDeslogado(){
               <div className='flex flex-col ml-4 float-left'>
                 {/*criei o component perfil pra colocar a imagem e os dados do user */}
                 <div className='py-4'>
-                {usuario.map((usuario) => (
-              <Perfil key={usuario.id}
+               
+              <Perfil key={usuario && usuario.id}
                 image="/morty.png"
-                name={usuario.nome}
-                curso={usuario.departamento}
-                email={usuario.email}
+                name={usuario && usuario.nome}
+                curso={usuario && usuario.departamento}
+                email={usuario && usuario.email}
               />
               
-            ))}
+        
               
                 </div>
               </div></div>
@@ -58,7 +63,7 @@ export default function UserDeslogado(){
         <div className='grid place-items-center w-full px-4'>
           {/*Criei o Post para ver as postagens*/}
           <Post
-            user='Billy Batson'
+            user={usuario && usuario.nome}
             data='17/08'
             hora='17:08'
             professor='Jacinto Pinto'
@@ -66,7 +71,7 @@ export default function UserDeslogado(){
             conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
           </Post>
           <Post
-            user='Billy Batson'
+            user={usuario && usuario.nome}
             data='17/08'
             hora='17:08'
             professor='Jacinto Pinto'
@@ -74,7 +79,7 @@ export default function UserDeslogado(){
             conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
           </Post>
           <Post
-            user='Billy Batson'
+            user={usuario && usuario.nome}
             data='17/08'
             hora='17:08'
             professor='Jacinto Pinto'
