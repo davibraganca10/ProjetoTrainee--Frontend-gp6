@@ -3,9 +3,9 @@ import Image from 'next/image'
 import Comentario from '@/components/comentario'
 import { Modal } from './modal'
 interface Dados {
-  user:string
-  data: string;
-  hora: string;
+  user:string | null;
+  data: Date;
+  hora: Date;
   professor: string;
   departamento: string;
   conteudo: string;
