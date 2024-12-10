@@ -5,6 +5,6 @@ const api = axios.create({
 })
 
 
-const getUser = async() => {
+export const getUser = async() => {
     await api.get("/user/");
 }
