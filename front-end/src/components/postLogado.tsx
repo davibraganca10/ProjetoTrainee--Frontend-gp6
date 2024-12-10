@@ -4,8 +4,8 @@ import Comentario from '@/components/comentario'
 import { Modal } from './modal'
 interface Dados {
   user:string | null;
-  data: string;
-  hora: string;
+  data: Date;
+  hora: Date;
   professor: string;
   departamento: string;
   conteudo: string;

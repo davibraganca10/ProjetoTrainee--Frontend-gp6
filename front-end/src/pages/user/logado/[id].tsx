@@ -6,9 +6,9 @@ import { Modal } from '../../../components/modal'
 import InputsCadastro from '../../../components/Inputscadastro';
 import Perfil from '../../../components/perfil';
 import PostLogado from '../../../components/postLogado';
-import {getUser} from '../../../utils/api'
+import {getAvaliação, getUser} from '../../../utils/api'
 import { useRouter } from 'next/router';
-import { User } from '../../api/types'
+import { Avaliação, User } from '../../api/types'
 import { useParams } from 'next/navigation'
 
 export default function UserLogado(){
@@ -17,7 +17,7 @@ export default function UserLogado(){
   const  params  = useParams();
   const id = params ? params.id : null
   const router = useRouter();
-  const GetOneUser = async () => {
+  const GetOneUser = async () => {  {/*chamando a função getUser do api*/}
     try {
       const usuario=await getUser(Number(id))
       setUser(usuario)
@@ -25,6 +25,7 @@ export default function UserLogado(){
       
     } 
     catch (error) {
+
       router.push('/')
       
   }
@@ -32,8 +33,19 @@ export default function UserLogado(){
     setLoading(false)
   }
 }
+const[avaliações,setAvaliação]= useState<Avaliação[]>([])
+const UserAvaliações = async () =>{
+try {
+  const avaliações = await getAvaliação(Number(id)); 
+  setAvaliação(avaliações)
+  console.log(avaliações)
+  
+} catch (error) {
+  
+}}
   useEffect(() => {
     GetOneUser()
+    UserAvaliações()
     
   },)
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -81,30 +93,17 @@ export default function UserLogado(){
             <h1 className='font-bold text-lg text-xl px-4 mt-2'>Publicações</h1>
           <div className='grid place-items-center w-full px-4'>
             {/*Fiz o component PostLogado pra ver as postagens enquanto logado*/}
-            <PostLogado
+            {avaliações.map((avaliação) => (
+            <PostLogado key={avaliação.id}
               user={usuario && usuario.nome}
-              data='16/07'
-              hora='16:07'
-              professor='Jacinto Pinto'
-              departamento='Dpt do Amor'
-              conteudo='Avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário'>
+              data={avaliação && avaliação.createdAt}
+              hora={avaliação && avaliação.createdAt}
+              professor='carlos'
+              departamento='Dpt de matematica'
+              conteudo={avaliação && avaliação.conteudo}>              
             </PostLogado>
-            <PostLogado
-              user={usuario && usuario.nome}
-              data='17/08'
-              hora='17:08'
-              professor='Paula Tejano'
-              departamento='Fisioterapia'
-              conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
-            </PostLogado>
-            <PostLogado
-              user={usuario && usuario.nome}
-              data='18/09'
-              hora='18:09'
-              professor='Deide Costa'
-              departamento='Massagem'
-              conteudo='Avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário'>
-            </PostLogado>
+             ))
+            }
           </div>
         </div>
         {/*Chama o Modal para edição do usuário*/}

@@ -16,4 +16,11 @@ export type User = {
     createdAt: Date,
     updatedAt: Date,
   }
+  export type Avaliação = {
+    id: number,
+    userID: number,
+    conteudo: string,
+    createdAt: Date,
+    updatedAt: Date,
+  }
   
