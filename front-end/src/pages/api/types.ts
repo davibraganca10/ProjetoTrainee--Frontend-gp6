@@ -23,4 +23,12 @@ export type User = {
     createdAt: Date,
     updatedAt: Date,
   }
+
+  export type CreateUser = {
+    nome: string,
+    email: string,
+    senha: string,
+    departamento: string,
+    curso: string,
+  }
   
