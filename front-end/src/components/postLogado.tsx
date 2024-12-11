@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Comentario from '@/components/comentario'
 import { Modal } from './modal'
+
 interface Dados {
   user:string | null;
-  data: Date;
-  hora: Date;
+  datahora: Date;
   professor: string;
   departamento: string;
   conteudo: string;
 }
 
 
-const PostLogado: React.FC<Dados> = ({ conteudo, user, data, hora, professor, departamento }) => {
+const PostLogado: React.FC<Dados> = ({ conteudo, user, datahora, professor, departamento }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
   function handleOpenModal(){
     setModalIsOpen(!modalIsOpen)
@@ -24,7 +24,7 @@ const PostLogado: React.FC<Dados> = ({ conteudo, user, data, hora, professor, de
         <div className='flex flex-col justify-center items-center text-center'>
             <div className='flex flex-row'>
                 <h1 className='text'>{user}</h1>
-                <div className='text-gray-500 ml-2 float-right overflow-y-auto' >{data} - {hora} - {professor} - {departamento}</div>
+                <div className='text-gray-500 ml-2 float-right overflow-y-auto' >{datahora} - {professor} - {departamento}</div>
             </div>
             <br></br>
             <p className='text-sm ml-5 mr-5'>{conteudo}</p>

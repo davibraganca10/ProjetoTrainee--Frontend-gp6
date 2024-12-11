@@ -96,8 +96,7 @@ try {
             {avaliações.map((avaliação) => (
             <PostLogado key={avaliação.id}
               user={usuario && usuario.nome}
-              data={avaliação && avaliação.createdAt}
-              hora={avaliação && avaliação.createdAt}
+              datahora={avaliação && avaliação.createdAt}
               professor='carlos'
               departamento='Dpt de matematica'
               conteudo={avaliação && avaliação.conteudo}>              
