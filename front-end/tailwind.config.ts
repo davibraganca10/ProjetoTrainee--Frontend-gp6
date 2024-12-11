@@ -15,7 +15,9 @@ export default {
         verde_unb: '#A4FED3',
         corBotaoLogin: '#00ABED',
         corFundo: '#EDEDED',
-        corModal: "#3EEE9A"
+        corModal: "#3EEE9A",
+        corTextAreaModal: "#A4FED3",
+        corHr: "#2B895C"
       },
       fontFamily: {
         fontAll: ['Questrial', 'sans-serif'],   //pode ser usada em varias partes do codigo.

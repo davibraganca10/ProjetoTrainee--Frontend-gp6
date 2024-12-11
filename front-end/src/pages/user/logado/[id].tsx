@@ -1,13 +1,53 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 //import Header from '@/components/header'
 import Link from 'next/link';
 import Image from 'next/image';
-import { Modal } from '@/components/modal';
-import InputsCadastro from '@/components/Inputscadastro';
-import Perfil from '@/components/perfil';
-import PostLogado from '@/components/postLogado';
+import { Modal } from '../../../components/modal'
+import InputsCadastro from '../../../components/Inputscadastro';
+import Perfil from '../../../components/perfil';
+import PostLogado from '../../../components/postLogado';
+import {getAvaliação, getUser} from '../../../utils/api'
+import { useRouter } from 'next/router';
+import { Avaliação, User } from '../../api/types'
+import { useParams } from 'next/navigation'
 
 export default function UserLogado(){
+  const [usuario, setUser] = useState<User | null>(null) 
+  const [, setLoading] = useState(true)
+  const  params  = useParams();
+  const id = params ? params.id : null
+  const router = useRouter();
+  const GetOneUser = async () => {  {/*chamando a função getUser do api*/}
+    try {
+      const usuario=await getUser(Number(id))
+      setUser(usuario)
+      
+      
+    } 
+    catch (error) {
+
+      router.push('/')
+      
+  }
+  finally{
+    setLoading(false)
+  }
+}
+const[avaliações,setAvaliação]= useState<Avaliação[]>([])
+const UserAvaliações = async () =>{
+try {
+  const avaliações = await getAvaliação(Number(id)); 
+  setAvaliação(avaliações)
+  console.log(avaliações)
+  
+} catch (error) {
+  
+}}
+  useEffect(() => {
+    GetOneUser()
+    UserAvaliações()
+    
+  },)
   const [modalIsOpen, setModalIsOpen] = useState(false);
   function handleOpenModal(){
     setModalIsOpen(!modalIsOpen)
@@ -37,9 +77,9 @@ export default function UserLogado(){
                 {/*criei o component perfil pra colocar a imagem e os dados do user */}
                 <div className='py-4'><Perfil
                   image="/morty.png"
-                  name="Morty Gamer"  
-                  curso="Ciencia da Computação"
-                  email="morty.gamer@cjr.org.br">
+                  name={usuario && usuario.nome} 
+                  curso={usuario && usuario.curso}
+                  email={usuario && usuario.email}>
                 </Perfil> 
               </div></div>
                {/*Criei os botões para editar o perfil e para excluí-lo*/}
@@ -53,30 +93,17 @@ export default function UserLogado(){
             <h1 className='font-bold text-lg text-xl px-4 mt-2'>Publicações</h1>
           <div className='grid place-items-center w-full px-4'>
             {/*Fiz o component PostLogado pra ver as postagens enquanto logado*/}
-            <PostLogado
-              user='Bruce Wayne'
-              data='16/07'
-              hora='16:07'
-              professor='Jacinto Pinto'
-              departamento='Dpt do Amor'
-              conteudo='Avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário avaliação 1 desse usuário'>
+            {avaliações.map((avaliação) => (
+            <PostLogado key={avaliação.id}
+              user={usuario && usuario.nome}
+              data={avaliação && avaliação.createdAt}
+              hora={avaliação && avaliação.createdAt}
+              professor='carlos'
+              departamento='Dpt de matematica'
+              conteudo={avaliação && avaliação.conteudo}>              
             </PostLogado>
-            <PostLogado
-              user='Billy Batson'
-              data='17/08'
-              hora='17:08'
-              professor='Paula Tejano'
-              departamento='Fisioterapia'
-              conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
-            </PostLogado>
-            <PostLogado
-              user='Barry Allen'
-              data='18/09'
-              hora='18:09'
-              professor='Deide Costa'
-              departamento='Massagem'
-              conteudo='Avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário avaliação 3 desse usuário'>
-            </PostLogado>
+             ))
+            }
           </div>
         </div>
         {/*Chama o Modal para edição do usuário*/}

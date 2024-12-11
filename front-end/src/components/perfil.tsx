@@ -3,9 +3,9 @@ import Image from 'next/image';
 
 interface Param {
     image: string; 
-    name: string;  
-    curso: string;
-    email: string;
+    name: string | null;  
+    curso: string | null;
+    email: string | null;
       
   }
 

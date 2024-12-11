@@ -6,13 +6,20 @@ export type Professor = {
     updatedAt: Date,
   }
 
-export type Usuario = {
+export type User = {
     id: number,
     nome: string,
     email: string,
     senha: string,
     departamento: string,
     curso: string,
+    createdAt: Date,
+    updatedAt: Date,
+  }
+  export type Avaliação = {
+    id: number,
+    userID: number,
+    conteudo: string,
     createdAt: Date,
     updatedAt: Date,
   }

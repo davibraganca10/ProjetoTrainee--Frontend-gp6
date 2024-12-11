@@ -1,3 +1,4 @@
+import { Avaliação, User } from '@/pages/api/types';
 import axios from 'axios';
 
 const api = axios.create({
@@ -12,7 +13,7 @@ export const getUsers = async() => {
 
 export const CreateUser = async (user: Partial<User>) => {
     const response = await api.post("/user",{
-        name: user.name,
+        name: user.nome,
         email: user.email
     });
     return response.data;
