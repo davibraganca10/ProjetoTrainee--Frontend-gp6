@@ -6,19 +6,13 @@ const api = axios.create({
 })
 
 
-export const getUsers = async() => {
-    const response = await api.get("/user");
+
+export const getUser = async (id: number): Promise<User> => {
+    const response = await api.get(`/user/${id}`);
     return response.data;
 }
-
-export const CreateUser = async (user: Partial<User>) => {
-    const response = await api.post("/user",{
-        name: user.nome,
-        email: user.email
-    });
+  
+export const getAvaliação = async (userid:number): Promise<Avaliação[]> => {
+    const response = await api.get(`/avaliacao/${userid}`);
     return response.data;
-}
-
-export const patchUserReq = async(user: Partial<User>, id:number) => {
-    api.patch('/user${id}',user);
 }
