@@ -1,31 +1,37 @@
 import HeaderLogado from "@/components/header.logado";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 import { Comentario } from "../api/types";
 
 const AvaliacaoComComentario = () => {
     const [comentarios, setComentarios] = useState<Comentario[]>([]);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    const [showComentarios, setShowComentarios] = useState(false);
 
-
-  useEffect(() => {
     const fetchComentarios = async () => {
-      try {
-        const response = await fetch("http://localhost:3333/comentarios");
-        if (response) {
+        try {
+          setLoading(true); 
+          const response = await fetch("http://localhost:3333/comentarios");
+          if (response.ok) {
             const data: Comentario[] = await response.json();
             setComentarios(data);
-            setLoading(false);
+          } else {
+            console.log("Erro");
+          }
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
         }
+      };
+    
+      const handleShowComentarios = () => {
+        if (!showComentarios && comentarios.length === 0) {
+          fetchComentarios(); 
+        }
+        setShowComentarios((prev) => !prev);
+      };
 
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    if (loading){
-        fetchComentarios();    
-    }
-  });
       
   return (
     <div>
@@ -44,30 +50,52 @@ const AvaliacaoComComentario = () => {
               Professor bacana. Adoro quando falta!
             </p>
             <div className="mt-3">
-              <p className="text-sm text-gray-700">{comentarios.length === 1 ? '1 comentário' : `${comentarios.length} comentários`}</p>
+            <button
+                onClick={handleShowComentarios}
+                className="text-blue-500 underline"
+              >
+                {showComentarios
+                  ? "Esconder comentários"
+                  : `Ver ${
+                      loading
+                        ? "..." 
+                        : comentarios.length === 1
+                        ? "1 comentário"
+                        : `${comentarios.length} comentários`
+                    }`}
+              </button>
             </div>
+            
           </div>
 
-          <div className="bg-green-200 p-6 border-t mx-4 flex flex-col gap-6">
-            {comentarios.map((comentario) => (
-              <div key={comentario.id} className="mb-2">
-                <div className="flex flex-rows items-center gap-2 mb-1">
-                  <Image
-                    src='/perfil.png'
-                    alt=""
-                    width={20}
-                    height={30}
-                  />
-                  <p className="text-sm font-bold text-black">
-                    {comentario.user.nome} - {new Date(comentario.createdAt).toLocaleString("pt-BR")}
-                  </p>
-                </div>
-                <p className="text-black">{comentario.conteudo}</p>
-                <hr className="border-corHr w-full mt-4" />
-              </div>
-            ))}
-              
-          </div>
+          {showComentarios && (
+            <div className="bg-green-200 p-6 border-t mx-4 flex flex-col gap-6">
+              {loading ? (
+                <p>Carregando comentários...</p>
+              ) : comentarios.length > 0 ? (
+                comentarios.map((comentario) => (
+                  <div key={comentario.id} className="mb-2">
+                    <div className="flex flex-rows items-center gap-2 mb-1">
+                      <Image
+                        src="/perfil.png"
+                        alt=""
+                        width={20}
+                        height={30}
+                      />
+                      <p className="text-sm font-bold text-black">
+                        {comentario.user.nome} -{" "}
+                        {new Date(comentario.createdAt).toLocaleString("pt-BR")}
+                      </p>
+                    </div>
+                    <p className="text-black">{comentario.conteudo}</p>
+                    <hr className="border-corHr w-full mt-4" />
+                  </div>
+                ))
+              ) : (
+                <p>Nenhum comentário disponível.</p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -75,3 +103,5 @@ const AvaliacaoComComentario = () => {
 };
 
 export default AvaliacaoComComentario;
+        
+
