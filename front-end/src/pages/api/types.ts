@@ -31,4 +31,16 @@ export type User = {
     departamento: string,
     curso: string,
   }
+
+  export type Comentario = {
+    id: number;
+    userID: number;
+    avaliacaoID: number;
+    conteudo: string;
+    createdAt: Date;
+    updatedAt: Date;
+    user: {
+      nome: string;
+    };
+  }
   
