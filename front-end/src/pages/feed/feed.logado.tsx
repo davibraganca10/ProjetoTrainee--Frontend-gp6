@@ -71,6 +71,7 @@ const FeedDeslogado = () => {
             />
             {professores.map((professor) => (
               <Card key={professor.id}
+                id = {professor.id}
                 image="/rick.png"
                 name={professor.nome}
                 role={professor.departamento}
