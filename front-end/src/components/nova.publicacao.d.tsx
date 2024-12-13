@@ -64,9 +64,8 @@ const NovaPublicacaoModal = () => {
   
   return (
     <div className="relative">
-
-      <button {/* botao em si (com fundo azul e escrito nova publicacao*/}
-        onClick={handleOpenModal}
+      {/* botao em si (com fundo azul e escrito nova publicacao*/}
+      <button
         className="bg-corBotaoLogin font-fontAll text-white text-lg px-4 py-1 mr-2 border-white border-2 rounded-xl hover:bg-blue-500 transition-all drop-shadow-2xl w-44">
         Nova Publicação
       </button>
