@@ -25,7 +25,7 @@ export type User = {
   updatedAt: Date;
 };
 
-export type Avaliação = {
+export type Avaliacao = {
   id: number;
   userID: number;
   conteudo: string;
