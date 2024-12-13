@@ -6,6 +6,14 @@ export type Professor = {
   updatedAt: Date;
 };
 
+export type Disciplina = {
+  id: number;
+  nome: string;
+  professoresID: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export type User = {
   id: number;
   nome: string;
