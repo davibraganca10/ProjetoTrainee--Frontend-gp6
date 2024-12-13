@@ -13,11 +13,11 @@ export type User = {
   senha: string;
   departamento: string;
   curso: string;
-  createdAt: Date;
+  createdAt: string;
   updatedAt: Date;
 };
 
-export type Avaliacao = {
+export type Avaliação = {
   id: number;
   userID: number;
   conteudo: string;
