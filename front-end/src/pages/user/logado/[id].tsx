@@ -8,7 +8,7 @@ import Perfil from '../../../components/perfil';
 import PostLogado from '../../../components/postLogado';
 import {getAvaliação, getUser} from '../../../utils/api'
 import { useRouter } from 'next/router';
-import { Avaliação, User } from '../../api/types'
+import { Avaliacao, User } from '../../api/types'
 import { useParams } from 'next/navigation'
 
 export default function UserLogado(){
@@ -33,7 +33,7 @@ export default function UserLogado(){
     setLoading(false)
   }
 }
-const[avaliações,setAvaliação]= useState<Avaliação[]>([])
+const[avaliações,setAvaliação]= useState<Avaliacao[]>([])
 const UserAvaliações = async () =>{
 try {
   const avaliações = await getAvaliação(Number(id)); 
@@ -98,7 +98,7 @@ try {
               user={usuario && usuario.nome}
               datahora={avaliação.createdAt}
               professor='carlos'
-              departamento='Dpt de matematica'
+              departamento='dept. matematica'
               conteudo={avaliação.conteudo}>              
             </PostLogado>
              ))

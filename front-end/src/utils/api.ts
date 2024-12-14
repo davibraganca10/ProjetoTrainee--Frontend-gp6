@@ -13,7 +13,7 @@ export const getUser = async (id: number): Promise<User> => {
 }
   
 export const getAvaliação = async (userid:number): Promise<Avaliacao[]> => {
-    const response = await api.get(`/avaliacao/${userid}`);
+    const response = await api.get(`/avaliacao/user/${userid}`);
     return response.data;
 }
 
