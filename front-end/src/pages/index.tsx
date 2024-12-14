@@ -52,7 +52,7 @@ const FeedDeslogado = () => {
                 name="Rick Sanchez"
                 role="Segurança Computacional"
               />
-            {professores.map((professor) => (
+            {Array.isArray(professores) && professores?.map((professor) => (
               <Card key={professor.id}
                 image="/rick.png"
                 name={professor.nome}

@@ -22,11 +22,11 @@ export default function UserLogado(){
       const usuario=await getUser(Number(id))
       setUser(usuario)
       
-      
+     
     } 
     catch (error) {
 
-      router.push('/')
+      
       
   }
   finally{
@@ -93,13 +93,13 @@ try {
             <h1 className='font-bold text-lg text-xl px-4 mt-2'>Publicações</h1>
           <div className='grid place-items-center w-full px-4'>
             {/*Fiz o component PostLogado pra ver as postagens enquanto logado*/}
-            {avaliações.map((avaliação) => (
+            {Array.isArray(avaliações) && avaliações?.map((avaliação) => (
             <PostLogado key={avaliação.id}
               user={usuario && usuario.nome}
-              datahora={avaliação && avaliação.createdAt}
+              datahora={avaliação.createdAt}
               professor='carlos'
               departamento='Dpt de matematica'
-              conteudo={avaliação && avaliação.conteudo}>              
+              conteudo={avaliação.conteudo}>              
             </PostLogado>
              ))
             }
