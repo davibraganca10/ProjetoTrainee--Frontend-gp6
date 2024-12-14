@@ -98,7 +98,7 @@ try {
               user={usuario && usuario.nome}
               datahora={avaliação.createdAt}
               professor='carlos'
-              departamento='Dpt de matematica'
+              departamento='dept. matematica'
               conteudo={avaliação.conteudo}>              
             </PostLogado>
              ))
