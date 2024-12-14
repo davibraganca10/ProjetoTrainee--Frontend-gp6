@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import { Modal } from '../../../components/modal'
-import InputsCadastro from '../../../components/Inputscadastro';
+import Input from '../../../components/Input';
 import Perfil from '../../../components/perfil';
 import PostLogado from '../../../components/postLogado';
 import {getAvaliação, getUser} from '../../../utils/api'
 import { useRouter } from 'next/router';
-import { Avaliação, User } from '../../api/types'
+import { Avaliacao, User } from '../../api/types'
 import { useParams } from 'next/navigation'
 
 export default function UserLogado(){
@@ -33,7 +33,7 @@ export default function UserLogado(){
     setLoading(false)
   }
 }
-const[avaliações,setAvaliação]= useState<Avaliação[]>([])
+const[avaliações,setAvaliação]= useState<Avaliacao[]>([])
 const UserAvaliações = async () =>{
 try {
   const avaliações = await getAvaliação(Number(id)); 
@@ -114,7 +114,7 @@ try {
           </div>
           <div className='flex flex-col items-center justify-center'>
             <div className="p-6 rounded-lg w-full max-w-sm">     
-              <InputsCadastro />
+              <Input />
               <div className='mb-4'>
                 <input
                   type="password"
