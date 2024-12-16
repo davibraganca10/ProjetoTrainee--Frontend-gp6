@@ -55,3 +55,12 @@ export type Comentario = {
     nome: string;
   };
 };
+
+export type SendLogin = {
+  email: string;
+  senha: string;
+};
+
+export type Token = {
+  access_token: string;
+};

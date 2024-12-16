@@ -1,10 +1,7 @@
 "use client"
 
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import InputsCadastro from '@/components/Inputscadastro';
-import { User } from '../api/types'
-import { postUsuario } from '@/utils/api';
 
 const cadastro = () => {
   return (

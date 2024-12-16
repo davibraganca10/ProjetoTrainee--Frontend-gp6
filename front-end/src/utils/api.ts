@@ -1,4 +1,4 @@
-import { Avaliacao, CreateUser, User } from '@/pages/api/types';
+import { Avaliacao, CreateUser, SendLogin, Token, User } from '@/pages/api/types';
 import axios from 'axios';
 
 const api = axios.create({
@@ -19,5 +19,10 @@ export const getAvaliação = async (userid:number): Promise<Avaliacao[]> => {
 
 export const postUsuario = async (data:CreateUser): Promise<User> => {
     const response = await api.post(`/user/`, data);
+    return response.data;
+}
+
+export const postLogin = async (data:SendLogin): Promise<Token> => {
+    const response = await api.post(`/login/`, data);
     return response.data;
 }

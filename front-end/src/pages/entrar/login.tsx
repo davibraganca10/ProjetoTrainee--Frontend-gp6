@@ -1,8 +1,24 @@
-import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from "next/link";
+import { SendLogin } from '../api/types';
+import { postLogin } from '@/utils/api';
 
 const login = () => {
+
+  const[form, setform] = useState<SendLogin>(
+    {
+      email:"",
+      senha:""
+    }
+  )
+  
+  const enviaLogin = async() =>{
+    try {
+      console.log(await postLogin(form))
+    } catch (error) {
+      
+    }
+  }
   return (
     <>
       {/*Imagem*/}
@@ -24,6 +40,8 @@ const login = () => {
               type="email"
               placeholder="Email"
               className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              value={form.email}
+              onChange={(e) => setform({...form,email:e.target.value})}
             />
           </div>
 
@@ -33,13 +51,15 @@ const login = () => {
               type="password"
               placeholder="Senha"
               className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              value={form.senha}
+              onChange={(e) => setform({...form,senha:e.target.value})}
             />
           </div>
         </div>
 
         {/*Botoes*/}
         <div className="justify-center w-full max-w-sm flex space-x-12">
-          <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-500 transition-all" onClick={()=> console.log("Clicado Criar Conta")}>Entrar</button>
+          <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-500 transition-all" onClick={enviaLogin}>Entrar</button>
           <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-500 transition-all" onClick={()=> console.log("Clicado Entrar")}><Link href={"/entrar/cadastro"}>Criar Conta</Link></button>
         </div>
       </div>
