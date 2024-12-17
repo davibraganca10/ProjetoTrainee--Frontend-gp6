@@ -60,7 +60,9 @@ const login = () => {
         {/*Botoes*/}
         <div className="justify-center w-full max-w-sm flex space-x-12">
           <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-500 transition-all" onClick={enviaLogin}>Entrar</button>
-          <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-500 transition-all" onClick={()=> console.log("Clicado Entrar")}><Link href={"/entrar/cadastro"}>Criar Conta</Link></button>
+          <Link href={"/entrar/cadastro"} className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-500 transition-all">
+          <button className="justify-center w-full flex text-center" onClick={()=> console.log("Clicado Entrar")}>Criar Conta</button>
+          </Link>
         </div>
       </div>
       </div>
