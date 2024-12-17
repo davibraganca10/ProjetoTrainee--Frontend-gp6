@@ -3,12 +3,11 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import { Modal } from '../../../components/modal'
-import Input from '../../../components/Input';
 import Perfil from '../../../components/perfil';
 import PostLogado from '../../../components/postLogado';
-import {getAvaliação, getUser} from '../../../utils/api'
+import {deleteUser, getAvaliação, getUser, patchUser} from '../../../utils/api'
 import { useRouter } from 'next/router';
-import { Avaliacao, User } from '../../api/types'
+import { Avaliacao, EditUser, User } from '../../api/types'
 import { useParams } from 'next/navigation'
 
 export default function UserLogado(){
@@ -38,11 +37,36 @@ const UserAvaliações = async () =>{
 try {
   const avaliações = await getAvaliação(Number(id)); 
   setAvaliação(avaliações)
-  console.log(avaliações)
+  
   
 } catch (error) {
   
 }}
+   const[edituser, setEdituser] = useState<EditUser>(
+      {
+        nome: "",
+        email:"",
+        senha:"",
+        curso:"",
+        departamento:""
+       
+      }
+    )
+    const atualizarUser = async () => {
+      try {
+        await patchUser(edituser, Number(id))
+      } catch (error) {
+        
+      }
+    }
+    const apagarUser = async () => {
+      try {
+        await deleteUser(Number(id))
+      } catch (error) {
+        
+      }
+    }
+
   useEffect(() => {
     GetOneUser()
     UserAvaliações()
@@ -84,7 +108,7 @@ try {
               </div></div>
                {/*Criei os botões para editar o perfil e para excluí-lo*/}
               <div className="flex-col flex py-2 float-right">
-                <button className="ml-12 mr-6 mt-24 px-5 py-1.5 bg-red-400 text-white rounded hover:bg-red-500 transition-all" onClick={()=> console.log("Clidado Excluir Conta")}>Excluir Perfil</button>
+                <button className="ml-12 mr-6 mt-24 px-5 py-1.5 bg-red-400 text-white rounded hover:bg-red-500 transition-all" onClick={apagarUser}>Excluir Perfil</button>
                 <button className="ml-12 mr-6 mt-5 px-5 py-1.5 bg-blue-400 text-white rounded hover:bg-blue-500 transition-all" onClick={handleOpenModal}>Editar Perfil</button>
               </div>
             </div>
@@ -114,30 +138,67 @@ try {
           </div>
           <div className='flex flex-col items-center justify-center'>
             <div className="p-6 rounded-lg w-full max-w-sm">     
-              <Input />
-              <div className='mb-4'>
-                <input
-                  type="password"
-                  placeholder="Senha atual"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                />
-              </div>
+              {/*Entrada de nome*/}
+          <div className="mb-4">
+            <input
+              placeholder="Nome"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              value={edituser.nome}
+              onChange={(e) => setEdituser({...edituser,nome:e.target.value})}
+            />
+          </div>
+          
+          {/*Entrada de email*/}
+          <div className="mb-4">
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              value={edituser.email}
+              onChange={(e) => setEdituser({...edituser,email:e.target.value})}
+            />
+          </div>
+
+          
+
+          {/*Entrada de curso*/}
+          <div className="mb-4">
+            <input
+              placeholder="Curso"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              value={edituser.curso}
+              onChange={(e) => setEdituser({...edituser,curso:e.target.value})}
+            />
+          </div>
+
+          {/*Entrada de departamento*/}
+          <div className='mb-4'>
+            <input
+              placeholder="Departamento"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              value={edituser.departamento}
+              onChange={(e) => setEdituser({...edituser,departamento:e.target.value})}
+            />
+          </div>
+      
               <div className='mb-4'>
                 <input
                   type="password"
                   placeholder="Nova senha"
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  onChange={(e) => setEdituser({...edituser, senha: e.target.value})}
                 />
               </div>
-              <div>
+              {/*<div>
                 <input
                   type="password"
                   placeholder="Confirmar nova senha"
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  onChange={(e) => setEdituser({...edituser, confirmasenha: e.target.value})}
                 />
-              </div>
+              </div>*/}
             </div>
-            <button className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=> console.log("Clicado Confirmar")}>Confirmar</button>
+            <button onClick={atualizarUser} className="w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all">Confirmar</button>
           </div>
         </Modal>
     </main>

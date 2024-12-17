@@ -1,9 +1,9 @@
-import { CreateUser } from '@/pages/api/types';
-import { postUsuario } from '@/utils/api';
+import { EditUser } from '@/pages/api/types';
+import { patchUser, } from '@/utils/api';
 import React, { useState } from 'react';
-const InputsCadastro = () => {
+const Input = () => {
 
-    const[form, setform] = useState<CreateUser>(
+    const[form, setform] = useState<EditUser>(
       {
         nome: "",
         email:"",
@@ -13,9 +13,9 @@ const InputsCadastro = () => {
       }
     )
 
-    const criaUsuario = async() =>{
+    const editUsuario = async() =>{
       try {
-        await postUsuario(form)
+        await patchUser(form)
       } catch (error) {
         
       }
@@ -44,16 +44,7 @@ const InputsCadastro = () => {
             />
           </div>
 
-          {/*Entrada de senha*/}
-          <div className="mb-4">
-            <input
-              type="password"
-              placeholder="Senha"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              value={form.senha}
-              onChange={(e) => setform({...form,senha:e.target.value})}            
-            />
-          </div>
+          
 
           {/*Entrada de curso*/}
           <div className="mb-4">
@@ -77,4 +68,4 @@ const InputsCadastro = () => {
         </>
     );
 };
-export default InputsCadastro;
+export default Input;
