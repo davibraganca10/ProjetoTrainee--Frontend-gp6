@@ -71,3 +71,10 @@ export type SendLogin = {
 export type Token = {
   access_token: string;
 };
+
+export type OrdenarProfs = {
+  ordenarPorNome: () => void;
+  ordenarPorMateria: () => void;
+  ordenarPorRecente: () => void;
+  ordenarPorAntiga: () => void;
+};

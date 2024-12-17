@@ -5,9 +5,7 @@ import Card from '@/components/card_prof'
 import Ordenar from '@/components/ordenar_prof'
 import { Professor } from '../api/types'
 import HeaderLogado from '@/components/header.logado'
-//import NovaPublicacao from '@/components/nova.publicacao'
 import NovaPublicacaoModal from '@/components/nova.publicacao.d'
-//import NovaPublicacao from '@/components/nova.publicacao'
 
 
 const FeedDeslogado = () => {
@@ -32,6 +30,33 @@ const FeedDeslogado = () => {
       getProfessores()
     }
   })
+  const ordenarPorNome = () => {
+    setProfessores((prev) =>
+      [...prev].sort((a, b) => a.nome.localeCompare(b.nome))
+    );
+  };
+
+  const ordenarPorMateria = () => {
+    setProfessores((prev) =>
+      [...prev].sort((a, b) => a.departamento.localeCompare(b.departamento))
+    );
+  };
+
+  const ordenarPorRecente = () => {
+    setProfessores((prev) =>
+      [...prev].sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+    );
+  };
+
+  const ordenarPorAntiga = () => {
+    setProfessores((prev) =>
+      [...prev].sort(
+        (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      )
+    );
+  };
 
   return (
 
@@ -50,7 +75,11 @@ const FeedDeslogado = () => {
                 />
               <div className='flex flex-row'>
                 <NovaPublicacaoModal/>
-                <Ordenar />
+                <Ordenar
+                ordenarPorNome = {ordenarPorNome}
+                ordenarPorMateria = {ordenarPorMateria}
+                ordenarPorRecente = {ordenarPorRecente}
+                ordenarPorAntiga = {ordenarPorAntiga} />
               </div>
             </div>
             
