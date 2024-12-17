@@ -28,6 +28,7 @@ export type User = {
 export type Avaliacao = {
   id: number;
   userID: number;
+  professorID: number;
   conteudo: string;
   createdAt: string;
   updatedAt: string;

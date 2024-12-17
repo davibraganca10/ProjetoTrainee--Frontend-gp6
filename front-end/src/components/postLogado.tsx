@@ -6,8 +6,8 @@ import { Modal } from './modal'
 interface Dados {
   user:string | null;
   datahora: string;
-  professor: string;
-  departamento: string;
+  professor: string | undefined;
+  departamento: string | undefined;
   conteudo: string;
 }
 

@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { Modal } from '../../../components/modal'
 import Perfil from '../../../components/perfil';
 import PostLogado from '../../../components/postLogado';
-import {deleteUser, getAvaliação, getUser, patchUser} from '../../../utils/api'
+import {deleteUser, getAvaliação, GetProfavaliacao, getUser, patchUser} from '../../../utils/api'
 import { useRouter } from 'next/router';
-import { Avaliacao, EditUser, User } from '../../api/types'
-import { useParams } from 'next/navigation'
+import { Avaliacao, EditUser, Professor, User } from '../../api/types'
+import { useParams} from 'next/navigation'
 
 export default function UserLogado(){
   const [usuario, setUser] = useState<User | null>(null) 
@@ -33,15 +33,29 @@ export default function UserLogado(){
   }
 }
 const[avaliações,setAvaliação]= useState<Avaliacao[]>([])
+const [professores,setProfessor]= useState<Professor>()
 const UserAvaliações = async () =>{
 try {
   const avaliações = await getAvaliação(Number(id)); 
   setAvaliação(avaliações)
+  if (Array.isArray(avaliações)) {
+    // Use Promise.all para esperar todas as promessas de GetProfavaliacao serem resolvidas
+    const resultados = await Promise.all(avaliações.map(async (avaliação) => {
+      const professores = await GetProfavaliacao(avaliação.professorID);
+      setProfessor(professores)
+      
+    }));
+   
+    console.log(resultados);
+  }
+ 
+
   
   
 } catch (error) {
   
 }}
+
    const[edituser, setEdituser] = useState<EditUser>(
       {
         nome: "",
@@ -117,12 +131,14 @@ try {
             <h1 className='font-bold text-lg text-xl px-4 mt-2'>Publicações</h1>
           <div className='grid place-items-center w-full px-4'>
             {/*Fiz o component PostLogado pra ver as postagens enquanto logado*/}
+            
             {Array.isArray(avaliações) && avaliações?.map((avaliação) => (
+       
             <PostLogado key={avaliação.id}
               user={usuario && usuario.nome}
               datahora={avaliação.createdAt}
-              professor='carlos'
-              departamento='dept. matematica'
+              professor={professores && professores?.nome}
+              departamento={professores && professores?.departamento}
               conteudo={avaliação.conteudo}>              
             </PostLogado>
              ))
