@@ -1,10 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 
-//lembrando que esse header é para DESLOGADO
 
 const HeaderLogado = () => {
+  const { logout } = useAuth(); 
+  const router = useRouter(); 
+
+  const handleLogout = () => {
+    logout(); 
+    router.push('/feed');
+  };
   return (
     <header className="bg-verde_unb h-20 flex items-center justify-between border border-gray-300 px-4">
       <Link href="/feed" className="ml-3">
@@ -19,9 +27,9 @@ const HeaderLogado = () => {
           <Link href="/user/logado" className='mr-4'>
             <Image src="/morty.png" alt="morty" width={16} height={16} layout="responsive" />
           </Link>
-          <Link href="/feed" className='mr-4'>
-            <Image src="/sair.png" alt="sair" width={16} height={16} layout="responsive"/>
-          </Link>
+          <button onClick={handleLogout} className="mr-4">
+            <Image src="/sair.png" alt="sair" width={16} height={16} layout="responsive" />
+          </button>
         </div>
 
       </div>
