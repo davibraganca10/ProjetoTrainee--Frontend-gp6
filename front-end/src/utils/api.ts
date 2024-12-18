@@ -1,4 +1,4 @@
-import { Avaliacao, CreateComentario, CreateUser, EditUser, Professor, SendLogin, Token, User } from '@/pages/api/types';
+import { Avaliacao, CreateComentario, CreateUser, editAvaliacao, EditUser, Professor, SendLogin, Token, User } from '@/pages/api/types';
 import axios from 'axios';
 
 const api = axios.create({
@@ -47,4 +47,15 @@ export const deleteUser = async (id: number) => {
 export const postComentario = async (data:CreateComentario): Promise<CreateComentario> => {
     const response = await api.post(`/comentarios/`, data);
     return response.data;
+}
+export const patchAvaliacao = async (avaliacao: Partial<editAvaliacao>,id:number) =>{
+        const response = await api.patch(`/avaliacao/${id}`,
+            {
+                conteudo: avaliacao.conteudo
+            },
+        );
+        return response.data;
+}
+export const deleteAvaliacao = async (id: number) => {
+    await api.delete(`/avaliacao/${id}`)
 }

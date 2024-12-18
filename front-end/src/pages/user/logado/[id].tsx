@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { Modal } from '../../../components/modal'
 import Perfil from '../../../components/perfil';
 import PostLogado from '../../../components/postLogado';
-import {deleteUser, getAvaliação, GetProfavaliacao, getUser, patchUser, postComentario} from '../../../utils/api'
+import {deleteAvaliacao, deleteUser, getAvaliação, GetProfavaliacao, getUser, patchAvaliacao, patchUser, postComentario} from '../../../utils/api'
 import { useRouter } from 'next/router';
-import { Avaliacao, CreateComentario, EditUser, Professor, User } from '../../api/types'
+import { Avaliacao, CreateComentario, editAvaliacao, EditUser, Professor, User } from '../../api/types'
 
 import { useParams} from 'next/navigation'
 
@@ -57,7 +57,6 @@ try {
       const professores = await GetProfavaliacao(avaliação.professorID);
       setProfessor(professores)
      
-     
 
      
     }));
@@ -71,6 +70,31 @@ try {
 } catch (error) {
   
 }}
+const[editavaliacao, setAvaliacao] = useState<editAvaliacao>(
+  {
+    
+  conteudo:"",
+  }
+)
+const [conteudo, setConteudo] = useState("");
+const editAval = async (avaliacaoID: number) => {
+  try {
+    
+    const editavaliation = {
+      conteudo: conteudo,
+      
+    };
+
+    await patchAvaliacao(editavaliation,avaliacaoID);
+    console.log('Avaliação editada:', editavaliation);
+   
+
+  } catch  {
+    console.log('deu ruim')
+  }
+};
+
+
 const criaComentario = async (avaliacaoID: number,userID: number) => {
   try {
     
@@ -114,6 +138,13 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
         
       }
     }
+    const apagarAvaliacao = async (AvaliacaoID:number) => {
+      try {
+        await deleteAvaliacao(AvaliacaoID)
+      } catch (error) {
+        
+      }
+    }
   
 
   useEffect(() => {
@@ -128,6 +159,10 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
   const [modalCIsOpen, setModalCIsOpen] = useState(false);
     function handleOpenModalC(){
       setModalCIsOpen(!modalCIsOpen)
+    }
+    const [modalAIsOpen, setModalAIsOpen] = useState(false);
+    function handleOpenModalA(){
+      setModalAIsOpen(!modalAIsOpen)
     }
 
     return <main>
@@ -180,7 +215,12 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
               departamento={professores && professores?.departamento}
               conteudo={avaliação.conteudo} >   
               <div className="relative">
-              <button
+              <div className='justify-between flex'>
+                <div>
+            <div className='flex gap-x-2 ml-8'>
+                <Image className='' src='/chat.png' alt='' width={30} height={20}/>
+                {/*Chama o modal de Comentario*/}
+                <button
                 onClick={handleOpenModalC}
                 className="justify-center text-gray-500">
                 Comentarios
@@ -200,7 +240,39 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
                         <div className='flex justify-center'>
                           <button className="flex justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=>criaComentario(avaliação.id,Number(id))}>Enviar</button>
                         </div>
-            </Modal>          
+            </Modal>   
+            </div>          
+            <div className='mr-8 flex gap-x-3 justify-end'>
+              <div className='flex  justify-center items-center space-x-3'>
+              <button onClick={()=> console.log('Editar postagem')}>
+                <Image src='/editar.png' alt='editar' width={18} height={20} onClick={handleOpenModalA}/>
+              </button>
+                {/*Chama o modal de edição de avaliações*/}
+                <div>
+              <Modal isOpen={modalAIsOpen} onClose={handleOpenModalA}>
+                <div className='mb-6 border-b border-green-300 py-7 text-center'>
+                  <div className='mt-3'>
+                    <h2 className='text-3xl font-semibold text-white'>Editar avaliação</h2>
+                  </div>
+                </div>
+                <textarea className='bg-green-100 px-4 py-3 flex flex-center items-center rounded-md justify-center w-full h-60 transition-all'
+                  placeholder='Escreva aqui'
+                  value={conteudo}
+                  onChange={(e) => setConteudo(e.target.value)}
+                  ></textarea>
+                <div className='flex justify-center'>
+                  <button className="flex justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=>editAval(avaliação.id)}>Editar</button>
+                </div>
+              </Modal>
+              </div>
+              <button onClick={() => apagarAvaliacao(avaliação.id)}>
+                <Image src='/lixeira.png' alt='excluir' width={20} height={20}/>
+              </button>
+              </div>
+              </div>
+            </div>  
+            
+        </div>       
             </PostLogado>
              ))
             }

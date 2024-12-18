@@ -36,7 +36,9 @@ export type Avaliacao = {
     nome: string;
   };
 };
-
+export type editAvaliacao = {
+  conteudo: string,
+}
 export type CreateUser = {
   nome: string;
   email: string;
@@ -45,11 +47,11 @@ export type CreateUser = {
   curso: string;
 };
 export type EditUser = {
-  nome: string;
-  email: string;
-  senha: string;
-  departamento: string;
-  curso: string;
+  nome?: string;
+  email?: string;
+  senha?: string;
+  departamento?: string;
+  curso?: string;
 };
 export type Comentario = {
   id: number;
