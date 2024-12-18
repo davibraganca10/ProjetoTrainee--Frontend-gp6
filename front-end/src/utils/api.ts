@@ -1,4 +1,4 @@
-import { Avaliacao, CreateUser, EditUser, Professor, SendLogin, Token, User } from '@/pages/api/types';
+import { Avaliacao, CreateComentario, CreateUser, EditUser, Professor, SendLogin, Token, User } from '@/pages/api/types';
 import axios from 'axios';
 
 const api = axios.create({
@@ -43,4 +43,8 @@ export const patchUser = async (user: Partial<EditUser>, id: number) => {
 }
 export const deleteUser = async (id: number) => {
     await api.delete(`/user/${id}`)
+}
+export const postComentario = async (data:CreateComentario): Promise<CreateComentario> => {
+    const response = await api.post(`/comentarios/`, data);
+    return response.data;
 }

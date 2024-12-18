@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import Image from 'next/image'
 import Comentario from '@/components/comentario'
 import { Modal } from './modal'
@@ -9,14 +9,16 @@ interface Dados {
   professor: string | undefined;
   departamento: string | undefined;
   conteudo: string;
+  children: ReactNode;
 }
 
 
-const PostLogado: React.FC<Dados> = ({ conteudo, user, datahora, professor, departamento }) => {
+const PostLogado: React.FC<Dados> = ({ conteudo, user, datahora, professor, departamento, children }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
   function handleOpenModal(){
     setModalIsOpen(!modalIsOpen)
   }
+  
   return(
     <>
     
@@ -34,7 +36,7 @@ const PostLogado: React.FC<Dados> = ({ conteudo, user, datahora, professor, depa
             <div className='flex gap-x-2 ml-8'>
                 <Image className='' src='/chat.png' alt='' width={30} height={20}/>
                 {/*Chama o modal de Comentario*/}
-                <Comentario/>
+                {children}
             </div>          
             <div className='mr-8 flex gap-x-3'>
               <button onClick={()=> console.log('Editar postagem')}>

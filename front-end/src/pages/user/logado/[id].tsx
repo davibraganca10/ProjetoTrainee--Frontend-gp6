@@ -5,17 +5,28 @@ import Image from 'next/image';
 import { Modal } from '../../../components/modal'
 import Perfil from '../../../components/perfil';
 import PostLogado from '../../../components/postLogado';
-import {deleteUser, getAvaliação, GetProfavaliacao, getUser, patchUser} from '../../../utils/api'
+import {deleteUser, getAvaliação, GetProfavaliacao, getUser, patchUser, postComentario} from '../../../utils/api'
 import { useRouter } from 'next/router';
-import { Avaliacao, EditUser, Professor, User } from '../../api/types'
+import { Avaliacao, CreateComentario, EditUser, Professor, User } from '../../api/types'
+
 import { useParams} from 'next/navigation'
 
 export default function UserLogado(){
-  const [usuario, setUser] = useState<User | null>(null) 
-  const [, setLoading] = useState(true)
   const  params  = useParams();
   const id = params ? params.id : null
   const router = useRouter();
+  const [comentarios, setComentarios] = useState<CreateComentario>(
+    {
+      userID: Number(id),
+      avaliacaoID: 24,
+      conteudo: ''
+      
+    }
+   
+  );
+  const [usuario, setUser] = useState<User | null>(null) 
+  const [, setLoading] = useState(true)
+ 
   const GetOneUser = async () => {  {/*chamando a função getUser do api*/}
     try {
       const usuario=await getUser(Number(id))
@@ -32,8 +43,10 @@ export default function UserLogado(){
     setLoading(false)
   }
 }
+
 const[avaliações,setAvaliação]= useState<Avaliacao[]>([])
 const [professores,setProfessor]= useState<Professor>()
+
 const UserAvaliações = async () =>{
 try {
   const avaliações = await getAvaliação(Number(id)); 
@@ -43,18 +56,39 @@ try {
     const resultados = await Promise.all(avaliações.map(async (avaliação) => {
       const professores = await GetProfavaliacao(avaliação.professorID);
       setProfessor(professores)
-      
+     
+     
+
+     
     }));
    
-    console.log(resultados);
+   
   }
  
-
+ 
   
   
 } catch (error) {
   
 }}
+const criaComentario = async (avaliacaoID: number,userID: number) => {
+  try {
+    
+    const comentario = {
+      ...comentarios,
+      userID:userID,
+      avaliacaoID: avaliacaoID,
+      
+    };
+
+    await postComentario(comentario);
+    console.log('Comentário postado:', comentario);
+   
+
+  } catch  {
+    console.log('deu zebra')
+  }
+};
 
    const[edituser, setEdituser] = useState<EditUser>(
       {
@@ -80,6 +114,7 @@ try {
         
       }
     }
+  
 
   useEffect(() => {
     GetOneUser()
@@ -90,6 +125,10 @@ try {
   function handleOpenModal(){
     setModalIsOpen(!modalIsOpen)
   }
+  const [modalCIsOpen, setModalCIsOpen] = useState(false);
+    function handleOpenModalC(){
+      setModalCIsOpen(!modalCIsOpen)
+    }
 
     return <main>
       {/*Recriei o Header, mas adaptando o Login para Deslogar*/ }
@@ -139,10 +178,33 @@ try {
               datahora={avaliação.createdAt}
               professor={professores && professores?.nome}
               departamento={professores && professores?.departamento}
-              conteudo={avaliação.conteudo}>              
+              conteudo={avaliação.conteudo} >   
+              <div className="relative">
+              <button
+                onClick={handleOpenModalC}
+                className="justify-center text-gray-500">
+                Comentarios
+              </button>
+            </div>
+            <Modal isOpen={modalCIsOpen} onClose={handleOpenModalC}>
+            <div className='mb-6 border-b border-green-300 py-7 text-center'>
+                          <div className='mt-3'>
+                            <h2 className='text-3xl font-semibold text-white'>Adicionar comentario</h2>
+                          </div>
+                        </div>
+                        <textarea className='bg-green-100 px-4 py-3 flex flex-center items-center rounded-md justify-center w-full h-60 transition-all'
+                          placeholder='Escreva aqui'
+                          value={comentarios.conteudo}
+                          onChange={(e) => setComentarios({...comentarios,conteudo:e.target.value})}
+                          ></textarea>
+                        <div className='flex justify-center'>
+                          <button className="flex justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=>criaComentario(avaliação.id,Number(id))}>Enviar</button>
+                        </div>
+            </Modal>          
             </PostLogado>
              ))
             }
+        
           </div>
         </div>
         {/*Chama o Modal para edição do usuário*/}

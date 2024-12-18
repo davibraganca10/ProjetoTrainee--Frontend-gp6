@@ -62,7 +62,12 @@ export type Comentario = {
     nome: string;
   };
 };
+export type CreateComentario = {
+    userID: number;
+    avaliacaoID: number;
+    conteudo: string;
 
+}
 export type SendLogin = {
   email: string;
   senha: string;
