@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  login: () => void;
+  login: (token: string) => void;
   logout: () => void;
 }
 
@@ -18,9 +18,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setIsLoggedIn(!!token); // se há token, user logado.
   }, []);
 
-  const login = () => {
+  const login = (token: string) => {
     setIsLoggedIn(true);
-    localStorage.setItem("token", "mock-token"); //token falso para testar.
+    localStorage.setItem("token", token); // Salva o token no localStorage
   };
 
   const logout = () => {

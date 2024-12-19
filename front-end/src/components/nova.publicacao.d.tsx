@@ -91,7 +91,7 @@ const NovaPublicacaoModal = () => {
           <select
             className="w-full px-4 py-2 my-2 border rounded-xl"
             value={selectedProfessor}
-            onChange={(e) => setSelectedProfessor(e.target.value)}
+            onChange={ (e) => setSelectedProfessor(e.target.value)}
           >
             <option value="" disabled selected>
               Nome do Professor
@@ -105,7 +105,7 @@ const NovaPublicacaoModal = () => {
           <select
             className="w-full px-4 py-2 my-4 border rounded-xl"
             value={selectedDisciplina}
-            onChange={(e) => setSelectedDisciplina(e.target.value)}
+            onChange={ (e) => setSelectedDisciplina(e.target.value)}
           >
             <option value="" disabled selected>
               Disciplina
@@ -178,7 +178,7 @@ const NovaPublicacaoModal = () => {
             className="rounded-md rounded-t-none py-3 px-4 mt-0 bg-corTextAreaModal flex flex-center items-center justify-center w-full h-60 transition-all"
             placeholder="Escreva aqui"
             value={conteudo}
-            onChange={(e) => setConteudo(e.target.value)}
+            onChange={ (e) => setConteudo(e.target.value)}
           ></textarea>
 
           <div className="flex flex-rows justify-end">

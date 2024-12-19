@@ -5,7 +5,14 @@ const api = axios.create({
     baseURL: 'http://localhost:3333',
 })
 
-
+interface LoginRequest {
+    email: string;
+    senha: string;
+  }
+  
+  interface LoginResponse {
+    access_token: string;
+  }
 
 export const getUser = async (id: number): Promise<User> => {
     const response = await api.get(`/user/${id}`);
@@ -22,10 +29,10 @@ export const postUsuario = async (data:CreateUser): Promise<User> => {
     return response.data;
 }
 
-export const postLogin = async (data:SendLogin): Promise<Token> => {
-    const response = await api.post(`/login/`, data);
+export const postLogin = async (data: { email: string; senha: string }) => {
+    const response = await axios.post('http://localhost:3333/auth/login', data);
     return response.data;
-}
+  };
 export const GetProfavaliacao = async (avaliacaoid: number): Promise<Professor> => {
     const response = await api.get(`/professor/${avaliacaoid}`);
     return response.data;
