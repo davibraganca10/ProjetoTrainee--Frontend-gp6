@@ -210,7 +210,7 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
        
             <PostLogado key={avaliação.id}
               user={usuario && usuario.nome}
-              datahora={avaliação.createdAt}
+              datahora={new Date(avaliação.createdAt).toLocaleString("pt-BR")}
               professor={professores && professores?.nome}
               departamento={professores && professores?.departamento}
               conteudo={avaliação.conteudo} >   

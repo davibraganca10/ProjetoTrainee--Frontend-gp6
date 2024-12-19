@@ -6,7 +6,7 @@ import { Comentario, Avaliacao } from "../api/types";
 import axios from "axios";
 import Link from "next/link";
 
-const AvaliacaoComComentario = () => {
+const Avaliacoes = () => {
   const router = useRouter();
   const { id } = router.query;
   const [comentarios, setComentarios] = useState<Record<number, Comentario[]>>(
@@ -22,10 +22,13 @@ const AvaliacaoComComentario = () => {
   const fetchAvaliacoes = async () => {
     try {
       setLoadingAvaliacoes(true);
+      console.log(id);
       const response = await axios.get(
-        `http://localhost:3333/avaliacao/professor?professorID=${id}`
+        `http://localhost:3333/avaliacao/${id}`
       );
-      setAvaliacoes(response.data);
+      console.log(response.data);
+      setAvaliacoes([response.data]);
+      console.log(avaliacoes)
     } catch (error) {
       console.error(error);
     } finally {
@@ -63,8 +66,8 @@ const AvaliacaoComComentario = () => {
 
   useEffect(() => {
     if (id) {
-      fetchAvaliacoes();
-    }
+        fetchAvaliacoes();
+      }
   }, [id]);
 
   return (
@@ -75,7 +78,9 @@ const AvaliacaoComComentario = () => {
           {loadingAvaliacoes ? (
             <p>Carregando avaliações...</p>
           ) : avaliacoes.length > 0 ? (
-            avaliacoes.map((avaliacao) => (
+           avaliacoes.map((avaliacao) => (
+            console.log(avaliacao.user?.nome,'ok'),
+                
               <div
                 key={avaliacao.id}
                 className="bg-corModal p-4 border rounded-xl mb-4"
@@ -83,7 +88,8 @@ const AvaliacaoComComentario = () => {
                 <div className="flex flex-rows items-center gap-2 mb-2">
                   <Image src="/perfil.png" alt="" width={30} height={40} />
                   <h2 className="text-lg font-bold text-black">
-                  <Link href={`/user/${avaliacao.userID}`}>{avaliacao.user.nome}</Link>
+                   
+                  <Link href={`/user/${avaliacao.userID}`}>{avaliacao.user?.nome}</Link>
                   </h2>
                 </div>
                 <p className="text-sm text-black">
@@ -116,7 +122,7 @@ const AvaliacaoComComentario = () => {
                               height={30}
                             />
                             <p className="text-sm font-bold text-black">
-                              <Link href={`/user/${comentario.userID}`}>{comentario.user.nome} -{" "}</Link>
+                              <Link href={`/user/${comentario.userID}`}>{comentario.user?.nome} -{" "}</Link>
                               {new Date(comentario.createdAt).toLocaleString(
                                 "pt-BR"
                               )}
@@ -142,4 +148,4 @@ const AvaliacaoComComentario = () => {
   );
 };
 
-export default AvaliacaoComComentario;
+export default Avaliacoes;
