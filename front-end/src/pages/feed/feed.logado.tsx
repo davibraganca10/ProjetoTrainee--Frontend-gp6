@@ -6,12 +6,23 @@ import Ordenar from '@/components/ordenar_prof'
 import { Professor } from '../api/types'
 import HeaderLogado from '@/components/header.logado'
 import NovaPublicacaoModal from '@/components/nova.publicacao.d'
+import { useRouter } from 'next/router'
+import { useAuth } from '@/contexts/AuthContext'
 
 
-const FeedDeslogado = () => {
+const FeedLogado = () => {
   
   const [professores, setProfessores] = useState<Professor[]>([]) 
   const [loading, setLoading] = useState(true)
+  const { user, isLoggedIn } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoggedIn || !user) {
+      alert("Você não está autenticado. Redirecionando para login.");
+      router.push("/login"); // Redireciona para a página de login
+    }
+  }, [isLoggedIn, user, router]);
   
   useEffect(() => {
     async function getProfessores() {
@@ -57,7 +68,7 @@ const FeedDeslogado = () => {
       )
     );
   };
-
+//bla bla 
   return (
 
     <main className="flex flex-col min-h-screen">
@@ -111,4 +122,4 @@ const FeedDeslogado = () => {
   )
 }
 
-export default FeedDeslogado;
+export default FeedLogado;

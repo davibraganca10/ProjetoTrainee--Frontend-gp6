@@ -3,14 +3,17 @@ import { ModalNovaPub } from "./modal.nova.publicacao.d";
 import Image from "next/image";
 import axios from "axios";
 import { Professor, Disciplina } from "@/pages/api/types";
+import { useAuth } from "@/contexts/AuthContext";
 
 const NovaPublicacaoModal = () => {
+  const { user } = useAuth();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [professores, setProfessores] = useState<Professor[]>([]);
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
   const [selectedProfessor, setSelectedProfessor] = useState("");
   const [selectedDisciplina, setSelectedDisciplina] = useState("");
   const [conteudo, setConteudo] = useState("");
+  
 
   function handleOpenModal() {
     setModalIsOpen(!modalIsOpen);
@@ -47,9 +50,13 @@ const NovaPublicacaoModal = () => {
         alert("Você não está autenticado. Faça login para continuar.");
         return;
       }
-
+      if (!user) {
+        alert("Informações do usuário não disponíveis. Faça login novamente.");
+        return;
+      }
+      console.log("User ID:", user.id);
       const submitData = {
-        userID: 7, // userID fixo para teste
+        userID: user.id,
         professorID: Number(selectedProfessor),
         disciplinaID: Number(selectedDisciplina),
         conteudo,
@@ -70,9 +77,9 @@ const NovaPublicacaoModal = () => {
       setModalIsOpen(false);
     } catch (error) {
       if (error.response?.status === 401) {
-        alert("erro de autenticação. faça login novamente.");
+        alert("erro de autenticação. (ERRO 401) ");
       } else {
-        console.error("Erro ao enviar publicação: ", error);
+        console.error("outro erro que nao é o 401: ", error);
       }
     }
   };
