@@ -85,26 +85,7 @@ const FeedDeslogado = () => {
             
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-64 gap-x-4 gap-y-4'>
-            <Card 
-                image="/rick.png"
-                name="Rick Sanchez"
-                role="Segurança Computacional"
-            />
-            <Card 
-                image="/perfil.png"
-                name="Rick Sanchez"
-                role="Segurança Computacional"
-            />
-            <Card 
-                image="/perfil.png"
-                name="Rick Sanchez"
-                role="Segurança Computacional"
-            />
-            <Card 
-                image="/perfil.png"
-                name="Rick Sanchez"
-                role="Segurança Computacional"
-            />
+            
             {Array.isArray(professores) && professores?.map((professor) => (
               <Card key={professor.id}
                 id = {professor.id}
