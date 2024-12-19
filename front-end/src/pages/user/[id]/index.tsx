@@ -4,8 +4,8 @@ import Header from '../../../components/header'
 import Perfil from '../../../components/perfil'
 import Post from '../../../components/posts'
 import { useRouter } from 'next/router';
-import { User } from '../../api/types'
-import { getUser } from '@/utils/api'
+import { Avaliacao, Professor, User } from '../../api/types'
+import { getAvaliação, GetProfavaliacao, getUser } from '@/utils/api'
 import { useParams } from 'next/navigation'
 
 export default function UserDeslogado(){
@@ -22,16 +22,43 @@ export default function UserDeslogado(){
         
       } 
       catch (error) {
-        router.push('/')
+      
         
     }
     finally{
       setLoading(false)
     }
+    
   }
+  const[avaliações,setAvaliação]= useState<Avaliacao[]>([])
+  const [professores,setProfessor]= useState<Professor>()
+  
+  const UserAvaliações = async () =>{
+  try {
+    const avaliações = await getAvaliação(Number(id)); 
+    setAvaliação(avaliações)
+    if (Array.isArray(avaliações)) {
+      // Use Promise.all para esperar todas as promessas de GetProfavaliacao serem resolvidas
+      const resultados = await Promise.all(avaliações.map(async (avaliação) => {
+        const professores = await GetProfavaliacao(avaliação.professorID);
+        setProfessor(professores)
+       
+  
+       
+      }));
+     
+     
+    }
+   
+   
+    
+    
+  } catch (error) {
+    
+  }}
     useEffect(() => {
       GetOneUser()
-      
+      UserAvaliações()
     },)
   
   return <main>
@@ -62,30 +89,16 @@ export default function UserDeslogado(){
         <h1 className='font-bold text-lg text-xl px-4 mt-2'>Publicações</h1>
         <div className='grid place-items-center w-full px-4'>
           {/*Criei o Post para ver as postagens*/}
-          <Post
+          {Array.isArray(avaliações) && avaliações?.map((avaliação) => (
+          <Post key={avaliação.id}
             user={usuario && usuario.nome}
-            data='17/08'
-            hora='17:08'
-            professor='Jacinto Pinto'
-            departamento='Dpt do Amor'
-            conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
+            datahora={avaliação.createdAt}
+            professor={professores && professores?.nome}
+            departamento={professores && professores?.departamento}
+            conteudo={avaliação.conteudo}>
           </Post>
-          <Post
-            user={usuario && usuario.nome}
-            data='17/08'
-            hora='17:08'
-            professor='Jacinto Pinto'
-    	      departamento='Dpt do Amor'
-            conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
-          </Post>
-          <Post
-            user={usuario && usuario.nome}
-            data='17/08'
-            hora='17:08'
-            professor='Jacinto Pinto'
-            departamento='Dpt do Amor'
-            conteudo='Avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário avaliação 2 desse usuário'>
-          </Post>
+           ))
+          }
         </div>
       </div>
       </div>
