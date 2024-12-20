@@ -2,11 +2,17 @@ import HeaderLogado from "@/components/header.logado";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Comentario, Avaliacao } from "../api/types";
+import { Comentario, Avaliacao, CreateComentario } from "../api/types";
 import axios from "axios";
 import Link from "next/link";
+import { Modal } from "@/components/modal";
+import { postComentario } from "@/utils/api";
 
-const AvaliacaoComComentario = () => {
+const Avaliacoes = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+      function handleOpenModal(){
+        setModalIsOpen(!modalIsOpen)
+      }
   const router = useRouter();
   const { id } = router.query;
   const [comentarios, setComentarios] = useState<Record<number, Comentario[]>>(
@@ -18,14 +24,44 @@ const AvaliacaoComComentario = () => {
     Record<number, boolean>
   >({});
   const [avaliacoes, setAvaliacoes] = useState<Avaliacao[]>([]);
-
+const [comentariocriado, setComentar] = useState<CreateComentario>(
+    {
+      userID: 7, //fixo no leo pele, depois mudar para o id do usuario logado. mudar na linha 191 tmb
+      avaliacaoID: 24,
+      conteudo: ''
+      
+    }
+    
+   
+  );
+  const criaComentario = async (avaliacaoID: number,userID: number) => {
+    try {
+      
+      const comentar = {
+        ...comentariocriado,
+        userID:userID,
+        avaliacaoID: avaliacaoID,
+        
+      };
+  
+      await postComentario(comentar);
+      console.log('Comentário postado:', comentar);
+     
+  
+    } catch  {
+      console.log('deu zebra')
+    }
+  };
   const fetchAvaliacoes = async () => {
     try {
       setLoadingAvaliacoes(true);
+      console.log(id);
       const response = await axios.get(
-        `http://localhost:3333/avaliacao/professor?professorID=${id}`
+        `http://localhost:3333/avaliacao/${id}`
       );
-      setAvaliacoes(response.data);
+      console.log(response.data);
+      setAvaliacoes([response.data]);
+      console.log(avaliacoes)
     } catch (error) {
       console.error(error);
     } finally {
@@ -63,8 +99,8 @@ const AvaliacaoComComentario = () => {
 
   useEffect(() => {
     if (id) {
-      fetchAvaliacoes();
-    }
+        fetchAvaliacoes();
+      }
   }, [id]);
 
   return (
@@ -75,7 +111,9 @@ const AvaliacaoComComentario = () => {
           {loadingAvaliacoes ? (
             <p>Carregando avaliações...</p>
           ) : avaliacoes.length > 0 ? (
-            avaliacoes.map((avaliacao) => (
+           avaliacoes.map((avaliacao) => (
+            console.log(avaliacao.user?.nome,'ok'),
+                
               <div
                 key={avaliacao.id}
                 className="bg-corModal p-4 border rounded-xl mb-4"
@@ -83,7 +121,8 @@ const AvaliacaoComComentario = () => {
                 <div className="flex flex-rows items-center gap-2 mb-2">
                   <Image src="/perfil.png" alt="" width={30} height={40} />
                   <h2 className="text-lg font-bold text-black">
-                  <Link href={`/user/${avaliacao.userID}`}>{avaliacao.user.nome}</Link>
+                   
+                  <Link href={`/user/${avaliacao.userID}`}>{avaliacao.user?.nome}</Link>
                   </h2>
                 </div>
                 <p className="text-sm text-black">
@@ -116,7 +155,7 @@ const AvaliacaoComComentario = () => {
                               height={30}
                             />
                             <p className="text-sm font-bold text-black">
-                              <Link href={`/user/${comentario.userID}`}>{comentario.user.nome} -{" "}</Link>
+                              <Link href={`/user/${comentario.userID}`}>{comentario.user?.nome} -{" "}</Link>
                               {new Date(comentario.createdAt).toLocaleString(
                                 "pt-BR"
                               )}
@@ -125,13 +164,36 @@ const AvaliacaoComComentario = () => {
                           <p className="text-black">{comentario.conteudo}</p>
                           <hr className="border-corHr w-full mt-4" />
                         </div>
+                        
                       ))
+                    
                     ) : (
                       <p>Nenhum comentário disponível.</p>
                     )}
                   </div>
+                  
                 )}
+               <div className="flex items-center justify-center"><button
+              className="flex items-center justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-500 transition-all" onClick={handleOpenModal}>
+            Comentar</button></div>
+                <Modal isOpen={modalIsOpen} onClose={handleOpenModal}>
+                <div className='mb-6 border-b border-green-300 py-7 text-center'>
+                              <div className='mt-3'>
+                                <h2 className='text-3xl font-semibold text-white'>Adicionar comentario</h2>
+                              </div>
+                            </div>
+                            <textarea className='bg-green-100 px-4 py-3 flex flex-center items-center rounded-md justify-center w-full h-60 transition-all'
+                              placeholder='Escreva aqui'
+                              value={comentariocriado.conteudo}
+                          onChange={(e) => setComentar({...comentariocriado,conteudo:e.target.value})}
+                              ></textarea>
+                            <div className='flex justify-center'>
+                              <button className="flex justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=> criaComentario(Number(id),7)}>Enviar</button>
+                            </div>
+                </Modal>
+                
               </div>
+              
             ))
           ) : (
             <p>Nenhuma avaliação disponível.</p>
@@ -142,4 +204,4 @@ const AvaliacaoComComentario = () => {
   );
 };
 
-export default AvaliacaoComComentario;
+export default Avaliacoes;

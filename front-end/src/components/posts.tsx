@@ -8,10 +8,11 @@ interface Dados {
   professor: string | undefined;
   departamento: string | undefined;
   conteudo: string;
+  children: React.ReactNode;
 }
 
 
-const Post: React.FC<Dados> = ({ conteudo, user, datahora, professor, departamento }) => (
+const Post: React.FC<Dados> = ({ conteudo, children, user, datahora, professor, departamento }) => (
   <>
     <div className=" w-full bg-green-300 my-5 py-5 rounded-lg">
       <div className='flex flex-col justify-center items-center text-center'>
@@ -26,7 +27,7 @@ const Post: React.FC<Dados> = ({ conteudo, user, datahora, professor, departamen
       <div className='justify-between flex'>
         <div className='flex gap-x-2 ml-8'>
           <Image className='' src='/chat.png' alt='' width={30} height={20}/>
-          <button className='justify-center text-gray-500'onClick={()=> console.log("Abre os comentários")}>Comentarios</button>
+          {children}
         </div>
       </div>
     </div>

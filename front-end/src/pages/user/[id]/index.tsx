@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Avaliacao, Professor, User } from '../../api/types'
 import { getAvaliação, GetProfavaliacao, getUser } from '@/utils/api'
 import { useParams } from 'next/navigation'
+import Link from 'next/link'
 
 export default function UserDeslogado(){
     const [usuario, setUser] = useState<User | null>(null) 
@@ -92,10 +93,11 @@ export default function UserDeslogado(){
           {Array.isArray(avaliações) && avaliações?.map((avaliação) => (
           <Post key={avaliação.id}
             user={usuario && usuario.nome}
-            datahora={avaliação.createdAt}
+            datahora={new Date(avaliação.createdAt).toLocaleString("pt-BR")}
             professor={professores && professores?.nome}
             departamento={professores && professores?.departamento}
             conteudo={avaliação.conteudo}>
+             <Link href={`/avaliacoes/${avaliação.id}`} ><button className='justify-center text-gray-500'>Comentarios</button></Link>
           </Post>
            ))
           }

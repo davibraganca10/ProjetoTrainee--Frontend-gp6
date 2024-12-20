@@ -210,7 +210,7 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
        
             <PostLogado key={avaliação.id}
               user={usuario && usuario.nome}
-              datahora={avaliação.createdAt}
+              datahora={new Date(avaliação.createdAt).toLocaleString("pt-BR")}
               professor={professores && professores?.nome}
               departamento={professores && professores?.departamento}
               conteudo={avaliação.conteudo} >   
@@ -220,27 +220,12 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
             <div className='flex gap-x-2 ml-8'>
                 <Image className='' src='/chat.png' alt='' width={30} height={20}/>
                 {/*Chama o modal de Comentario*/}
-                <button
-                onClick={handleOpenModalC}
+              <Link href={`/avaliacoes/${avaliação.id}`} > <button               
                 className="justify-center text-gray-500">
                 Comentarios
-              </button>
+              </button></Link> 
             </div>
-            <Modal isOpen={modalCIsOpen} onClose={handleOpenModalC}>
-            <div className='mb-6 border-b border-green-300 py-7 text-center'>
-                          <div className='mt-3'>
-                            <h2 className='text-3xl font-semibold text-white'>Adicionar comentario</h2>
-                          </div>
-                        </div>
-                        <textarea className='bg-green-100 px-4 py-3 flex flex-center items-center rounded-md justify-center w-full h-60 transition-all'
-                          placeholder='Escreva aqui'
-                          value={comentarios.conteudo}
-                          onChange={(e) => setComentarios({...comentarios,conteudo:e.target.value})}
-                          ></textarea>
-                        <div className='flex justify-center'>
-                          <button className="flex justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=>criaComentario(avaliação.id,Number(id))}>Enviar</button>
-                        </div>
-            </Modal>   
+             
             </div>          
             <div className='mr-8 flex gap-x-3 justify-end'>
               <div className='flex  justify-center items-center space-x-3'>

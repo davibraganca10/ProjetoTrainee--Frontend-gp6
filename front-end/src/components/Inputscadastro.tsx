@@ -76,7 +76,7 @@ const InputsCadastro = () => {
           </div>
 
           {/*Botoes*/}
-          <div className="justify-center w-full space-x-12">
+          <div className="justify-center w-full flex space-x-12">
             <button className="px-4 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600" onClick={criaUsuario}>Criar Conta</button>
           </div>
         </>
