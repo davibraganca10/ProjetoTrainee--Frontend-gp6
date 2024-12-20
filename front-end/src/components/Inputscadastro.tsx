@@ -1,8 +1,13 @@
+import { useAuth } from '@/contexts/AuthContext';
 import { CreateUser } from '@/pages/api/types';
-import { postUsuario } from '@/utils/api';
+import { postLogin, postUsuario } from '@/utils/api';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 const InputsCadastro = () => {
 
+    const { login } = useAuth();
+    const router = useRouter();
+    const [credentials, setForm] = useState({ email: "", senha: "" });
     const[form, setform] = useState<CreateUser>(
       {
         nome: "",
@@ -16,6 +21,13 @@ const InputsCadastro = () => {
     const criaUsuario = async() =>{
       try {
         await postUsuario(form)
+        credentials.email=form.email;
+        credentials.senha=form.senha;
+        const response = await postLogin(credentials); 
+        const { access_token } = response;
+        login(access_token);
+        console.log(access_token); 
+        router.push('/feed/feed.logado');
       } catch (error) {
         
       }
