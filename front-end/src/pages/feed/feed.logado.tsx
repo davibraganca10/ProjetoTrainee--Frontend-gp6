@@ -20,7 +20,7 @@ const FeedLogado = () => {
   useEffect(() => {
     if (!isLoggedIn || !user) {
       alert("Você não está autenticado. Redirecionando para login.");
-      router.push("/login"); // Redireciona para a página de login
+      router.push("/entrar/login"); // Redireciona para a página de login
     }
   }, [isLoggedIn, user, router]);
   

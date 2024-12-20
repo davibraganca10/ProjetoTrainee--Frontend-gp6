@@ -24,7 +24,7 @@ const HeaderLogado = () => {
           <Image src="/notificacao.png" alt="notificacao" width={16} height={16} layout="responsive"/>
         </Link>
         <div className='flex flex-row gap-x-2 items-center'>
-          <Link href="/user/logado" className='mr-4'>
+          <Link href={`/user/logado/`} className='mr-4'>
             <Image src="/morty.png" alt="morty" width={16} height={16} layout="responsive" />
           </Link>
           <button onClick={handleLogout} className="mr-4">
