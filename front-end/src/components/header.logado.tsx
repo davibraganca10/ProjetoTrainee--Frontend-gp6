@@ -17,7 +17,7 @@ const HeaderLogado = () => {
 
   const handleLogout = () => {
     logout(); 
-    router.push('/feed');
+    router.push('/');
   };
   const decodeJWT = (token: string): any => {
     try {
