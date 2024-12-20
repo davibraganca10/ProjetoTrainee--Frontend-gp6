@@ -11,6 +11,33 @@ const FeedDeslogado = () => {
   const [professores, setProfessores] = useState<Professor[]>([]) 
   const [loading, setLoading] = useState(true)
   
+  const ordenarPorNome = () => {
+    setProfessores((prev) =>
+      [...prev].sort((a, b) => a.nome.localeCompare(b.nome))
+    );
+  };
+
+  const ordenarPorMateria = () => {
+    setProfessores((prev) =>
+      [...prev].sort((a, b) => a.departamento.localeCompare(b.departamento))
+    );
+  };
+
+  const ordenarPorRecente = () => {
+    setProfessores((prev) =>
+      [...prev].sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+    );
+  };
+
+  const ordenarPorAntiga = () => {
+    setProfessores((prev) =>
+      [...prev].sort(
+        (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      )
+    );
+  };
   useEffect(() => {
     async function getProfessores() {
       try{
@@ -33,7 +60,7 @@ const FeedDeslogado = () => {
 
   return (
 
-    <main >
+    <main className="flex flex-col min-h-screen" >
 
       <Header />  {/* criei funcao pq pode ser reutilizado */}
       <section className="bg-corFundo flex-1 w-full h-full py-3 px-0 ">
@@ -47,32 +74,17 @@ const FeedDeslogado = () => {
                 className="w-96 border-gray-300 border-2 rounded-xl px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                 />
               <div className='flex flex-row'>
-                <Ordenar />
+              <Ordenar
+                ordenarPorNome = {ordenarPorNome}
+                ordenarPorMateria = {ordenarPorMateria}
+                ordenarPorRecente = {ordenarPorRecente}
+                ordenarPorAntiga = {ordenarPorAntiga} />
               </div>
             </div>
             
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-64 gap-x-4 gap-y-4'>
-            <Card 
-                image="/rick.png"
-                name="Rick Sanchez"
-                role="Segurança Computacional"
-            />
-            <Card 
-                image="/perfil.png"
-                name="Rick Sanchez"
-                role="Segurança Computacional"
-            />
-            <Card 
-                image="/perfil.png"
-                name="Rick Sanchez"
-                role="Segurança Computacional"
-            />
-            <Card 
-                image="/perfil.png"
-                name="Rick Sanchez"
-                role="Segurança Computacional"
-            />
+            
             {Array.isArray(professores) && professores?.map((professor) => (
               <Card key={professor.id}
                 id = {professor.id}
