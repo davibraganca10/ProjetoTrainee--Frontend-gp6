@@ -39,30 +39,63 @@ export const GetProfavaliacao = async (avaliacaoid: number): Promise<Professor> 
 }
 
 export const patchUser = async (user: Partial<EditUser>, id: number) => {
+    const token = localStorage.getItem("token"); // Obtenha o token do localStorage ou de onde estiver salvo
+    if (!token) {
+      alert("Você não está autenticado. Faça login para continuar.");
+    } 
     const response = await api.patch(`/user/update/${id}`, {
         nome: user.nome,
         email: user.email,
         senha: user.senha,
         departamento: user.departamento,
         curso: user.curso
-    },);
+    }, {headers: {
+        Authorization: `Bearer ${token}`,
+      },});
+    
     return response.data;
 }
 export const deleteUser = async (id: number) => {
-    await api.delete(`/user/${id}`)
+    const token = localStorage.getItem("token"); // Obtenha o token do localStorage ou de onde estiver salvo
+    if (!token) {
+      alert("Você não está autenticado. Faça login para continuar.");
+    } 
+    await api.delete(`/user/${id}`, {headers: {
+        Authorization: `Bearer ${token}`,
+      },})
 }
 export const postComentario = async (data:CreateComentario): Promise<CreateComentario> => {
-    const response = await api.post(`/comentarios/`, data);
+    const token = localStorage.getItem("token"); // Obtenha o token do localStorage ou de onde estiver salvo
+    if (!token) {
+      alert("Você não está autenticado. Faça login para continuar.");
+    } 
+    const response = await api.post(`/comentarios/`, data, {headers: {
+        Authorization: `Bearer ${token}`,
+      },});
+    
     return response.data;
 }
 export const patchAvaliacao = async (avaliacao: Partial<editAvaliacao>,id:number) =>{
+    const token = localStorage.getItem("token"); // Obtenha o token do localStorage ou de onde estiver salvo
+    if (!token) {
+      alert("Você não está autenticado. Faça login para continuar.");
+    } 
         const response = await api.patch(`/avaliacao/${id}`,
             {
                 conteudo: avaliacao.conteudo
             },
+            {headers: {
+                Authorization: `Bearer ${token}`,
+              },}
         );
         return response.data;
 }
 export const deleteAvaliacao = async (id: number) => {
-    await api.delete(`/avaliacao/${id}`)
+    const token = localStorage.getItem("token"); // Obtenha o token do localStorage ou de onde estiver salvo
+    if (!token) {
+      alert("Você não está autenticado. Faça login para continuar.");
+    } 
+    await api.delete(`/avaliacao/${id}`, {headers: {
+        Authorization: `Bearer ${token}`,
+      },})
 }

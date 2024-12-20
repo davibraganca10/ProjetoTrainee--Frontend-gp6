@@ -186,6 +186,7 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
             <div className='w-full border-2 border-gray-200'>
               <div className='h-32 float-top bg-green-400 rounded py-10 w-full'>
               <div className='flex flex-col ml-4 float-left'>
+              <Link href={'/feed/feed.logado'}><Image src="/sairt.png" alt="voltar"width={46} height={46}></Image></Link>
                 {/*criei o component perfil pra colocar a imagem e os dados do user */}
                 <div className='py-4'><Perfil
                   image="/morty.png"

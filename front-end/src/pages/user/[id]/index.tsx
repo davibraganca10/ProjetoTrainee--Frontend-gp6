@@ -8,7 +8,7 @@ import { Avaliacao, Professor, User } from '../../api/types'
 import { getAvaliação, GetProfavaliacao, getUser } from '@/utils/api'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-
+import Image from 'next/image'
 export default function UserDeslogado(){
     const [usuario, setUser] = useState<User | null>(null) 
     const [, setLoading] = useState(true)
@@ -64,12 +64,16 @@ export default function UserDeslogado(){
   
   return <main>
     <Header />
-    <div>
+    <div className=''>
+      
       <div className="max-w-xl mx-auto bg-white border border-gray-300 rounded-lg shadow-md">
       <div className='flex flex-col'>
             <div className='w-full border-2 border-gray-200'>
+              
               <div className='h-32 float-top bg-green-400 rounded py-10 w-full'>
               <div className='flex flex-col ml-4 float-left'>
+      <Link href={'/'}><Image src="/sairt.png" alt="voltar"width={46} height={46}></Image></Link>
+
                 {/*criei o component perfil pra colocar a imagem e os dados do user */}
                 <div className='py-4'>
                

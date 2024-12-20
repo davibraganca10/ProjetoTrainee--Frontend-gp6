@@ -7,8 +7,14 @@ import axios from "axios";
 import Link from "next/link";
 import { Modal } from "@/components/modal";
 import { postComentario } from "@/utils/api";
+import { useAuth } from "@/contexts/AuthContext";
+interface Userativo {
+  id: number;
+  email: string;
+}
 
 const Avaliacoes = () => {
+  const { user, isLoggedIn } = useAuth();
     const [modalIsOpen, setModalIsOpen] = useState(false);
       function handleOpenModal(){
         setModalIsOpen(!modalIsOpen)
@@ -23,10 +29,56 @@ const Avaliacoes = () => {
   const [showComentarios, setShowComentarios] = useState<
     Record<number, boolean>
   >({});
+    const decodeJWT = (token: string): any => {
+      try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split('')
+            .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
+            .join('')
+        );
+        return JSON.parse(jsonPayload);
+      } catch (error) {
+        console.error('Erro ao decodificar o token JWT:', error);
+        throw new Error('Token inválido');
+      }
+    };
+    const [, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        console.log("Token carregado:", token);
+        if (token) {
+          try {
+            const userData = decodeToken(token);
+            setUserativo(userData);
+            setIsLoggedIn(true);
+          } catch (error) {
+            console.error("Erro ao processar o token no carregamento:", error);
+            localStorage.removeItem("token");
+          }
+        }
+        setLoading(false);
+      }, []);
+      const decodeToken = (token: string) => {
+        const decodedToken: any = decodeJWT(token);
+        const currentTime = Date.now() / 1000;
+    
+        if (decodedToken.exp < currentTime) {
+          throw new Error("Token expirado");
+        }
+    
+        return {
+          id: decodedToken.sub,
+          email: decodedToken.email,
+        };
+      };
+      const [userativo, setUserativo] = useState<Userativo | null>(null);
   const [avaliacoes, setAvaliacoes] = useState<Avaliacao[]>([]);
 const [comentariocriado, setComentar] = useState<CreateComentario>(
     {
-      userID: 7, //fixo no leo pele, depois mudar para o id do usuario logado. mudar na linha 191 tmb
+      userID: 7, //numeros aleatorios aqui, n faz diferença pq depois muda
       avaliacaoID: 24,
       conteudo: ''
       
@@ -100,6 +152,10 @@ const [comentariocriado, setComentar] = useState<CreateComentario>(
   useEffect(() => {
     if (id) {
         fetchAvaliacoes();
+      }
+      if (!isLoggedIn || !user) {
+        alert("Você não está autenticado. Redirecionando para login.");
+        router.push("/entrar/login"); // Redireciona para a página de login
       }
   }, [id]);
 
@@ -188,7 +244,7 @@ const [comentariocriado, setComentar] = useState<CreateComentario>(
                           onChange={(e) => setComentar({...comentariocriado,conteudo:e.target.value})}
                               ></textarea>
                             <div className='flex justify-center'>
-                              <button className="flex justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=> criaComentario(Number(id),7)}>Enviar</button>
+                              <button className="flex justify-center w-1/3 shadow-md mt-4 py-2 bg-green-500 text-white rounded hover:bg-blue-400 transition-all" onClick={()=> criaComentario(Number(id),Number(userativo?.id))}>Enviar</button>
                             </div>
                 </Modal>
                 
