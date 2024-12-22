@@ -98,7 +98,7 @@ const [comentariocriado, setComentar] = useState<CreateComentario>(
   
       await postComentario(comentar);
       console.log('Comentário postado:', comentar);
-     
+     alert('Comentário postado')
   
     } catch  {
       console.log('deu zebra')

@@ -42,14 +42,9 @@ export const patchUser = async (user: Partial<EditUser>, id: number) => {
     const token = localStorage.getItem("token"); // Obtenha o token do localStorage ou de onde estiver salvo
     if (!token) {
       alert("Você não está autenticado. Faça login para continuar.");
+      return;
     } 
-    const response = await api.patch(`/user/update/${id}`, {
-        nome: user.nome,
-        email: user.email,
-        senha: user.senha,
-        departamento: user.departamento,
-        curso: user.curso
-    }, {headers: {
+    const response = await api.patch(`/user/update/${id}`, user, {headers: {
         Authorization: `Bearer ${token}`,
       },});
     
@@ -94,6 +89,7 @@ export const deleteAvaliacao = async (id: number) => {
     const token = localStorage.getItem("token"); // Obtenha o token do localStorage ou de onde estiver salvo
     if (!token) {
       alert("Você não está autenticado. Faça login para continuar.");
+      return;
     } 
     await api.delete(`/avaliacao/${id}`, {headers: {
         Authorization: `Bearer ${token}`,

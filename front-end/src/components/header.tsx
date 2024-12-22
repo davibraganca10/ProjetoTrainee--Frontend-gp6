@@ -7,7 +7,7 @@ import Image from 'next/image';
 const Header = () => {
   return (
     <header className="bg-verde_unb h-20 flex items-center border border-gray-300 justify-between px-4">
-      <Link href="/feed" className="ml-3">
+      <Link href="/" className="ml-3">
         <Image src="/unb_logo.png" alt="logo unb" width={100} height={50} layout="responsive"/>
       </Link>
       <Link

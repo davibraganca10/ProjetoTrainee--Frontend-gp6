@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { Avaliacao, CreateComentario, editAvaliacao, EditUser, Professor, User } from '../../api/types'
 
 import { useParams} from 'next/navigation'
+import HeaderLogado from '@/components/header.logado';
 
 export default function UserLogado(){
   const  params  = useParams();
@@ -86,8 +87,8 @@ const editAval = async (avaliacaoID: number) => {
     };
 
     await patchAvaliacao(editavaliation,avaliacaoID);
-    console.log('Avaliação editada:', editavaliation);
-   
+    
+    alert('Avaliação editada')
 
   } catch  {
     console.log('deu ruim')
@@ -106,7 +107,7 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
     };
 
     await postComentario(comentario);
-    console.log('Comentário postado:', comentario);
+    console.log('aqui', comentario);
    
 
   } catch  {
@@ -115,6 +116,7 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
 };
 
    const[edituser, setEdituser] = useState<EditUser>(
+    
       {
         nome: "",
         email:"",
@@ -127,6 +129,7 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
     const atualizarUser = async () => {
       try {
         await patchUser(edituser, Number(id))
+        alert('Perfil atualizado')
       } catch (error) {
         
       }
@@ -167,20 +170,8 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
 
     return <main>
       {/*Recriei o Header, mas adaptando o Login para Deslogar*/ }
-      <header className="bg-verde_unb h-20 flex items-center justify-between px-4">
-        <Link  href="/feed" className="ml-3">
-        <Image src="/unb_logo.png" alt="logo unb" width={100} height={50} layout="responsive"/>
-        </Link>
-        <div className='flex gap-x-4'>
-          <Link href=''>
-            {/*adicionei o botão de notificação e de saída*/}
-            <Image src="/notificacao.png" alt='notificação' width={30} height={30} />
-          </Link>
-          <Link href="/feed" className="mr-4">
-            <Image src="/sair.png" alt="" width={31} height={31} />
-          </Link>
-        </div>
-      </header>
+      <HeaderLogado></HeaderLogado>
+
         <div className="max-w-xl mx-auto bg-white rounded border border-gray-300 shadow-md">
           <div className='flex flex-col items-center justify-center justify-between'>
             <div className='w-full border-2 border-gray-200'>
@@ -322,6 +313,7 @@ const criaComentario = async (avaliacaoID: number,userID: number) => {
                   type="password"
                   placeholder="Nova senha"
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  value={edituser.senha}
                   onChange={(e) => setEdituser({...edituser, senha: e.target.value})}
                 />
               </div>

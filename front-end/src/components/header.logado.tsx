@@ -37,7 +37,6 @@ const HeaderLogado = () => {
   };
   useEffect(() => {
       const token = localStorage.getItem("token");
-      console.log("Token carregado:", token);
       if (token) {
         try {
           const userData = decodeToken(token);
@@ -68,7 +67,7 @@ const HeaderLogado = () => {
       };
   return (
     <header className="bg-verde_unb h-20 flex items-center justify-between border border-gray-300 px-4">
-      <Link href="/feed" className="ml-3">
+      <Link href="/feed/feed.logado" className="ml-3">
         <Image src="/unb_logo.png" alt="logo unb" width={100} height={50} layout="responsive"/>
       </Link>
 
